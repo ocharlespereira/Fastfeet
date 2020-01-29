@@ -1,14 +1,12 @@
-const express = require('express');
+import express from 'express';
 
 class app {
   constructor() {
     this.server = express();
 
     this.middlewares();
-    this.route();
+    this.routes();
   }
-
-
 
   middlewares() {
     this.server.use(express.json());
@@ -19,4 +17,4 @@ class app {
   }
 }
 
-module.exports = new App().server;
+export default App().server;
