@@ -1,0 +1,11 @@
+{
+  "name": "Fastfeet",
+  "version": "1.0.0",
+  "description": "Aplicação para transportadora",
+  "main": "index.js",
+  "author": "Charles Pereira",
+  "license": "S",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
