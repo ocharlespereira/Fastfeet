@@ -32,7 +32,15 @@ module.exports = {
         allowNull: true,
       },
       cep: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER(8),
+        allowNull: false,
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updated_at: {
+        type: Sequelize.DATE,
         allowNull: false,
       },
     });
