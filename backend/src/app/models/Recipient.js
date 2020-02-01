@@ -13,9 +13,10 @@ class Recipient extends Model {
         cep: Sequelize.INTEGER,
       },
       {
-        Sequelize,
+        sequelize,
       }
     );
+    return this;
   }
 }
 
