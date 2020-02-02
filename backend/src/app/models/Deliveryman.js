@@ -5,7 +5,7 @@ class Deliveryman extends Model {
     super.init(
       {
         name: Sequelize.STRING,
-        path: Sequelize.STRING,
+        email: Sequelize.STRING,
       },
       {
         sequelize,
