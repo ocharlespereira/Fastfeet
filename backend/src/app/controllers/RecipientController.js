@@ -116,8 +116,8 @@ class RecipientController {
 
     if (!recipientExist) {
       return res
-        .status(401)
-        .json({ worning: 'Recipient not exists for delete.' });
+        .status(400)
+        .json({ error: 'Recipient not exists for delete.' });
     }
 
     const recipient = await Recipient.findByPk(id, {
