@@ -33,7 +33,7 @@ module.exports = {
         allowNull: true,
       },
       canceled_at: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       start_date: {

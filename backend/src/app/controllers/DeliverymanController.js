@@ -31,10 +31,16 @@ class DeliverymanController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    // retorna campos do usuário - (colunas)
-    const { id, name, email, avatar_id } = await Deliveryman.create(req.body);
+    const { id, email } = req.body;
 
-    // retorna objeto com dados setados acima
+    const deliveryExists = await Deliveryman.findOne({ where: { email } });
+
+    if (deliveryExists) {
+      return res.status(400).json({ error: 'Delivery email already exists.' });
+    }
+
+    const { name, avatar_id } = await Deliveryman.create(req.body);
+
     return res.json({
       id,
       name,
@@ -53,11 +59,19 @@ class DeliverymanController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
+    const { email } = req.body;
+
+    const deliveryEmailExists = await Deliveryman.findOne({ where: { email } });
+
+    if (deliveryEmailExists) {
+      return res.status(400).json({ error: 'Delivery email already exists.' });
+    }
+
     const { id } = req.params;
 
-    const develiveryId = await Deliveryman.findByPk(id);
+    const deliveryID = await Deliveryman.findByPk(id);
 
-    const { name, email, avatar_id } = await develiveryId.update(req.body);
+    const { name, avatar_id } = await deliveryID.update(req.body);
 
     return res.json({
       id,
@@ -68,7 +82,17 @@ class DeliverymanController {
   }
 
   async delete(req, res) {
-    const develivery = await Deliveryman.findByPk(req.params.id, {
+    const { id } = req.params;
+
+    const deliveryExist = await Deliveryman.findByPk(id);
+
+    if (!deliveryExist) {
+      return res
+        .status(400)
+        .json({ error: 'Deliveryman not exists for delete.' });
+    }
+
+    const develivery = await Deliveryman.findByPk(id, {
       attributes: ['id', 'name', 'email'],
     });
 

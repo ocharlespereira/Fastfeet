@@ -6,6 +6,10 @@ class Order extends Model {
       {
         name: Sequelize.STRING,
         email: Sequelize.STRING,
+        product: Sequelize.STRING,
+        canceled_at: Sequelize.DATE,
+        start_date: Sequelize.DATE,
+        end_date: Sequelize.DATE,
       },
       {
         sequelize,
@@ -16,7 +20,18 @@ class Order extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
+    this.belongsTo(models.Recipient, {
+      foreignKey: 'recipient_id',
+      as: 'recipient',
+    });
+    this.belongsTo(models.Deliveryman, {
+      foreignKey: 'deliveryman_id',
+      as: 'deliveryman',
+    });
+    this.belongsTo(models.Signature, {
+      foreignKey: 'signature_id',
+      as: 'signature',
+    });
   }
 }
 
