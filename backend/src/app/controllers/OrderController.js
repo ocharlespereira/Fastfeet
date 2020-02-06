@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { startOfHour, endOfHour, parseISO, isBefore } from 'date-fns';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -65,12 +66,16 @@ class OrderController {
 
     const { id } = req.body;
 
-    const OrderExists = await Order.findOne({
-      where: { id },
-    });
+    const OrderExists = await Order.findOne({ where: { id } });
 
     if (OrderExists) {
       return res.status(400).json({ error: 'Order already exists.' });
+    }
+
+    const startHour = startOfHour(parseISO(date)); // 08:00
+
+    if (isBefore(startHour, new Date())) {
+      res.status(400).json({ error: 'Past date are not permited.' });
     }
 
     const {
