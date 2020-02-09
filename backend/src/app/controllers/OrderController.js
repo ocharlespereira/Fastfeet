@@ -52,23 +52,31 @@ class OrderController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    /* const { id } = req.body;
+    // verifica se o recipientId está cadastrado na tabela recipients
+    const { recipient_id, deliveryman_id } = req.body;
 
-    const OrderExists = await Order.findOne({ where: { id } });
+    let recipient = null;
 
-    if (OrderExists) {
-      return res.status(400).json({ error: 'Order already exists.' });
-    } */
+    if (recipient_id) {
+      recipient = await Recipient.findByPk(recipient_id);
 
-    // const startHour = startOfHour(parseISO(date)); // 08:00
+      if (!recipient) {
+        return res.status(400).json({ error: 'Recipient not exists.' });
+      }
+    }
 
-    /* if (isBefore(startHour, new Date())) {
-      res.status(400).json({ error: 'Past date are not permited.' });
-    } */
+    // verifica se o deliverymanId está cadastrado na tabela deliveryman
+    let deliveryman = null;
 
-    const { id, recipient_id, deliveryman_id, product } = await Order.create(
-      req.body
-    );
+    if (deliveryman_id) {
+      deliveryman = await Deliveryman.findByPk(deliveryman_id);
+
+      if (!deliveryman) {
+        return res.status(400).json({ error: 'Deliveryman not exists.' });
+      }
+    }
+
+    const { id, product } = await Order.create(req.body);
 
     return res.json({
       id,
@@ -96,23 +104,33 @@ class OrderController {
       return res.status(400).json({ error: 'Order not exists.' });
     }
 
-    /* const recipientId = Recipient.findByPk(id);
+    // verifica se o recipientId está cadastrado na tabela recipients
+    const { recipient_id, deliveryman_id } = req.body;
 
-    if (!recipientId) {
-      return res.status(400).json({ error: 'Recipient not exists.' });
+    let recipient = null;
+
+    if (recipient_id) {
+      recipient = await Recipient.findByPk(recipient_id);
+
+      if (!recipient) {
+        return res.status(400).json({ error: 'Recipient not exists.' });
+      }
     }
 
-    const deliverymanId = Deliveryman.findByPk(id);
+    // verifica se o deliverymanId está cadastrado na tabela deliveryman
+    let deliveryman = null;
 
-    if (!deliverymanId) {
-      return res.status(400).json({ error: 'Deliveryman not exists.' });
-    } */
+    if (deliveryman_id) {
+      deliveryman = await Deliveryman.findByPk(deliveryman_id);
+
+      if (!deliveryman) {
+        return res.status(400).json({ error: 'Deliveryman not exists.' });
+      }
+    }
 
     const orderId = await Order.findByPk(id);
 
-    const { recipient_id, deliveryman_id, product } = await orderId.update(
-      req.body
-    );
+    const { product } = await orderId.update(req.body);
 
     return res.json({
       id,
