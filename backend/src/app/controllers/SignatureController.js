@@ -2,7 +2,7 @@ import Signature from '../models/Signature';
 
 class SignatureController {
   async store(req, res) {
-    const { originalname: name, Signaturename: path } = req.file;
+    const { originalname: name, filename: path } = req.file;
 
     const file = await Signature.create({
       name,
@@ -13,4 +13,4 @@ class SignatureController {
   }
 }
 
-export default new FileController();
+export default new SignatureController();

@@ -16,7 +16,7 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
-routes.post('/signature', upload.single('file'), SignatureController.store);
+routes.post('/signatures', upload.single('file'), SignatureController.store);
 
 routes.use(authMiddleware);
 
@@ -35,9 +35,9 @@ routes.post('/deliverymans', DeliverymanController.store);
 routes.put('/deliverymans/:id', DeliverymanController.update);
 routes.delete('/deliverymans/:id', DeliverymanController.delete);
 
-routes.get('/order', OrderController.index);
-routes.post('/order', OrderController.store);
-routes.put('/order/:id', OrderController.update);
-routes.delete('/order/:id', OrderController.delete);
+routes.get('/orders', OrderController.index);
+routes.post('/orders', OrderController.store);
+routes.put('/orders/:id', OrderController.update);
+routes.delete('/orders/:id', OrderController.delete);
 
 export default routes;

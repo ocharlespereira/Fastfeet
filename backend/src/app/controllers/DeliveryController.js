@@ -14,9 +14,12 @@ import Signature from '../models/Signature';
  * Criar Controller especifico para entregadores chamado: Delivery
  */
 
-class OrderController {
+class DeliveryController {
   async index(req, res) {
-    const order = await Order.findAll({
+    return res.json({ message: true });
+  }
+
+  /* const order = await Order.findAll({
       attributes: [
         'name',
         'email',
@@ -77,5 +80,7 @@ class OrderController {
       canceled_at,
       start_date,
       end_date,
-    });
-  }
+    }); */
+}
+
+export default new DeliveryController();
