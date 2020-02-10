@@ -9,7 +9,7 @@ import FileController from './app/controllers/FileController';
 import SignatureController from './app/controllers/SignatureController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import OrderController from './app/controllers/OrderController';
-import DeliveryController from './app/controllers/DeliveryController';
+import DeliveryOrdersController from './app/controllers/DeliveryOrdersController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -18,6 +18,12 @@ const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
 routes.post('/signatures', upload.single('file'), SignatureController.store);
+
+/**
+ * Entregador verifica as ordens em aberto
+ */
+routes.get('/delivery/:id/orders', DeliveryOrdersController.index);
+routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
 
 routes.use(authMiddleware);
 
@@ -40,10 +46,5 @@ routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
-/**
- * Entregador verifica as ordens em aberto
- */
-routes.get('/delivery/:id', DeliveryController.index);
-routes.put('/delivery/:id', DeliveryController.update);
 
 export default routes;
