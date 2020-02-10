@@ -9,8 +9,13 @@ import File from '../models/File';
 
 class OrderController {
   async index(req, res) {
+    // paginação
+    const { page = 1 } = req.query;
+
     const order = await Order.findAll({
       attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
+      limit: 20,
+      offset: (page - 1) * 20,
       include: [
         {
           model: Recipient,
