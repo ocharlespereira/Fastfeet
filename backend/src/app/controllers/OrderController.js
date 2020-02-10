@@ -5,6 +5,7 @@ import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import Signature from '../models/Signature';
+import File from '../models/File';
 
 class OrderController {
   async index(req, res) {
@@ -29,6 +30,13 @@ class OrderController {
           model: Deliveryman,
           as: 'deliveryman',
           attributes: ['id', 'name', 'email', 'avatar_id'],
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
         },
         {
           model: Signature,
@@ -52,7 +60,7 @@ class OrderController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    // verifica se o recipientId está cadastrado na tabela recipients
+    // Verifica se o recipientId está cadastrado na tabela recipients
     const { recipient_id, deliveryman_id } = req.body;
 
     let recipient = null;
@@ -65,7 +73,7 @@ class OrderController {
       }
     }
 
-    // verifica se o deliverymanId está cadastrado na tabela deliveryman
+    // Verifica se o deliverymanId está cadastrado na tabela deliveryman
     let deliveryman = null;
 
     if (deliveryman_id) {
@@ -104,7 +112,7 @@ class OrderController {
       return res.status(400).json({ error: 'Order not exists.' });
     }
 
-    // verifica se o recipientId está cadastrado na tabela recipients
+    // Verifica se o recipientId está cadastrado na tabela recipients
     const { recipient_id, deliveryman_id } = req.body;
 
     let recipient = null;
@@ -117,7 +125,7 @@ class OrderController {
       }
     }
 
-    // verifica se o deliverymanId está cadastrado na tabela deliveryman
+    // Verifica se o deliverymanId está cadastrado na tabela deliveryman
     let deliveryman = null;
 
     if (deliveryman_id) {
