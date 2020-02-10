@@ -9,6 +9,7 @@ import FileController from './app/controllers/FileController';
 import SignatureController from './app/controllers/SignatureController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import OrderController from './app/controllers/OrderController';
+import DeliveryController from './app/controllers/DeliveryController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -39,5 +40,10 @@ routes.get('/orders', OrderController.index);
 routes.post('/orders', OrderController.store);
 routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
+/**
+ * Entregador verifica as ordens em aberto
+ */
+routes.get('/delivery/:id', DeliveryController.index);
+routes.put('/delivery/:id', DeliveryController.update);
 
 export default routes;
