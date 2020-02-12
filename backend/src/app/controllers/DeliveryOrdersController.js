@@ -77,28 +77,22 @@ class DeliveryOrdersController {
         .json({ error: 'Order already exists for deliveryman.' });
     }
 
-    // const orderList = { start_date, end_date, signature_id };
+    const {
+      deliveryman_id,
+      recipient_id,
+      end_date,
+      signature_id,
+      canceled_at,
+    } = await orderExist.update(req.body);
 
-    const { end_date, signature_id, canceled_at } = await orderExist.update(
-      req.body
-    );
-
-    // console.log(parseDate);
-
-    return res.json({ start_date, end_date, signature_id, canceled_at });
+    return res.json({
+      deliveryman_id,
+      recipient_id,
+      start_date,
+      end_date,
+      signature_id,
+      canceled_at,
+    });
   }
-
-  /*
-
-   const { end_date, signature_id, canceled_at } = await ordersId.update(
-     req.body
-   );
-
-   return res.json({
-     canceled_at,
-     start_date, // : new Date(),
-     end_date,
-     signature_id,
-   }); */
 }
 export default new DeliveryOrdersController();
