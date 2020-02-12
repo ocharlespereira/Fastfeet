@@ -79,11 +79,13 @@ class DeliveryOrdersController {
 
     // const orderList = { start_date, end_date, signature_id };
 
-    const { end_date } = await orderExist.update(parseDate);
+    const { end_date, signature_id, canceled_at } = await orderExist.update(
+      req.body
+    );
 
     // console.log(parseDate);
 
-    return res.json(orderExist);
+    return res.json({ start_date, end_date, signature_id, canceled_at });
   }
 
   /*
