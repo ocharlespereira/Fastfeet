@@ -1,5 +1,6 @@
 // import * as Yup from 'yup';
-import { startOfHour, parseISO, getHours } from 'date-fns';
+import { startOfHour, parseISO, getHours, subHours, setHours } from 'date-fns';
+import { zonedTimeToUtc } from 'date-fns-tz';
 // import { Op } from 'sequelize';
 
 import Order from '../models/Order';
@@ -38,34 +39,31 @@ class DeliveryOrdersController {
   }
 
   async update(req, res) {
-    const { id } = req.params;
-
     /**
-     * Verifica se o entregador está no prazo entre as 08:00 e s 18:0.
+     * Verifica se o entregador está no prazo entre as 08:00 e s 18:00.
      */
     const { start_date } = req.body;
 
-    // convert a data em apenas horas com o startOfHours
-    const parseDate = startOfHour(parseISO(start_date));
+    // convert a data em apenas horas com o decrescimo de 2 horas subHours
+    const parseDate = subHours(parseISO(start_date), 2);
 
-    // aplico o getHours para trazer apenas a hora para a condição
-    if (
-      getHours(parseISO(parseDate)) < '08' ||
-      getHours(parseISO(parseDate)) > '18'
-    ) {
+    // console.log(getHours(parseDate) + 2);
+    // console.log(parseDate);
+
+    // convert a data em apenas horas com o acrescimo de 2 horas
+    if (getHours(parseDate) + 2 <= '08' || getHours(parseDate) + 2 >= '18') {
       return res
         .status(400)
         .json({ error: 'Products can be picked up between 08:00 and 18:00.' });
     }
 
-    // console.log(parseDate);
+    // return res.json(parseDate);
 
     /**
      * Busca ordens em aberto para entrega que não estejam canceladas
      */
     const { idOrder } = req.params;
-
-    const ordersId = await Order.findByPk(idOrder, {
+    const orderExist = await Order.findByPk(idOrder, {
       where: {
         deliveryman_id: req.params.id,
         canceled_at: null,
@@ -73,21 +71,32 @@ class DeliveryOrdersController {
       },
     });
 
-    const { end_date, signature_id, canceled_at } = await ordersId.update(
-      req.body
-    );
+    if (!orderExist) {
+      return res
+        .status(400)
+        .json({ error: 'Order already exists for deliveryman.' });
+    }
 
-    console.log(id);
+    // const orderList = { start_date, end_date, signature_id };
 
-    return res.json({
-      id: idOrder,
-      deliveryman_id: id,
-      recipient_id: ordersId.recipient_id,
-      canceled_at,
-      start_date,
-      end_date,
-      signature_id,
-    });
+    const { end_date } = await orderExist.update(parseDate);
+
+    // console.log(parseDate);
+
+    return res.json(orderExist);
   }
+
+  /*
+
+   const { end_date, signature_id, canceled_at } = await ordersId.update(
+     req.body
+   );
+
+   return res.json({
+     canceled_at,
+     start_date, // : new Date(),
+     end_date,
+     signature_id,
+   }); */
 }
 export default new DeliveryOrdersController();

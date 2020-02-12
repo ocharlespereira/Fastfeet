@@ -39,7 +39,7 @@ class RecipientController {
 
     const recipientExists = await Recipient.findOne({
       where: { name },
-      order: { name },
+      order: ['name'],
     });
 
     if (recipientExists) {
