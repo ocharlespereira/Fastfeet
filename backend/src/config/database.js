@@ -1,6 +1,6 @@
 module.exports = {
   dialect: 'postgres',
-  host: 'localhost',
+  host: '192.168.99.100', // 'localhost',
   port: 5432,
   username: 'postgres',
   password: 'docker',
@@ -9,5 +9,10 @@ module.exports = {
     timestamps: true,
     underscored: true,
     underscoredAll: true,
+    timezone: '-03:00',
+  },
+  dialectOptions: {
+    useUTC: false, // for reading from database
+    timezone: '-03:00',
   },
 };

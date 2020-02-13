@@ -1,5 +1,10 @@
 const bcrypt = require('bcryptjs');
 
+/**
+ * yarn sequelize db:seed:all
+ * para inserir no banco
+ */
+
 module.exports = {
   up: QueryInterface => {
     return QueryInterface.bulkInsert(
@@ -17,5 +22,5 @@ module.exports = {
     );
   },
 
-  down: () => { },
+  down: () => {},
 };
