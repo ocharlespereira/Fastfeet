@@ -1,7 +1,6 @@
 // import * as Yup from 'yup';
 import { parseISO, getHours, subHours, startOfDay, endOfDay } from 'date-fns';
-import { zonedTimeToUtc } from 'date-fns-tz';
-import { Op, fn, col } from 'sequelize';
+import { Op } from 'sequelize';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -47,13 +46,6 @@ class DeliveryOrdersController {
     // convert a data em apenas horas com o decrescimo de 3 horas subHours
     const parseDate = subHours(parseISO(start_date), 3);
 
-    const parseDate1 = parseISO(start_date);
-    const znDate = zonedTimeToUtc(parseDate1, 'America/Sao_Paulo');
-
-    console.log(startOfDay(znDate));
-    console.log(parseDate);
-    console.log(getHours(parseDate) + 3);
-
     // convert a data em apenas horas com o acrescimo de 3 horas
     if (getHours(parseDate) + 3 <= '08' || getHours(parseDate) + 3 >= '18') {
       return res
@@ -61,30 +53,9 @@ class DeliveryOrdersController {
         .json({ error: 'Products can be picked up between 08:00 and 18:00.' });
     }
 
-    // return res.json(parseDate);
-
     /**
-     * Verifica a quantidade de retiras no dia, não pode ser mais que 5
+     * Verifica se o entregador já fez mais de 5 retiradas no dia
      */
-
-    // if (getHours(parseDate) + 2 <= '08' || getHours(parseDate) + 2 >= '18') {
-    // /colocar aquia  validação
-    // }
-
-    const dateDay = new Date();
-    // const dateDay = subHours(parseISO(dateDay1), 2);
-
-    /* const countOrderDay = await Order.findAll({
-      attributes: [[fn('count', col('start_date')), 'countOrder']],
-      where: {
-        start_date: {
-          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
-        },
-        deliveryman_id: req.params.id,
-      },
-      // raw: true, // traz somente o resultado
-    }); */
-
     const countOrderDay = await Order.findAndCountAll({
       where: {
         start_date: {
@@ -99,12 +70,6 @@ class DeliveryOrdersController {
         .status(400)
         .json({ error: 'Only 5 retirees are allowed per delivery person.' });
     }
-
-    // console.log(dateDay);
-    console.log(countOrderDay.count);
-
-    // const dateD = Date(parseISO('yyyy-MM-dd'));
-    // console.log(dateD);
 
     /**
      * Busca ordens em aberto para entrega que não estejam canceladas
@@ -130,7 +95,7 @@ class DeliveryOrdersController {
       end_date,
       signature_id,
       canceled_at,
-    } = await orderExist.update(req.body);
+    } = await orderExist.update({});
 
     return res.json({
       deliveryman_id,
