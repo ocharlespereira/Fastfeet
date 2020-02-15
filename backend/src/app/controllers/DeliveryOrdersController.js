@@ -1,7 +1,7 @@
 // import * as Yup from 'yup';
-import { startOfHour, parseISO, getHours, subHours, setHours } from 'date-fns';
+import { parseISO, getHours, subHours, startOfDay, endOfDay } from 'date-fns';
 import { zonedTimeToUtc } from 'date-fns-tz';
-// import { Op } from 'sequelize';
+import { Op, fn, col } from 'sequelize';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -45,10 +45,13 @@ class DeliveryOrdersController {
     const { start_date } = req.body;
 
     // convert a data em apenas horas com o decrescimo de 2 horas subHours
-    const parseDate = subHours(parseISO(start_date), 2);
+    const parseDate = subHours(parseISO(start_date), 3);
 
-    // console.log(getHours(parseDate) + 2);
-    // console.log(parseDate);
+    const parseDate1 = parseISO(start_date);
+    const znDate = zonedTimeToUtc(parseDate1, 'America/Sao_Paulo');
+
+    console.log(startOfDay(znDate));
+    console.log(parseDate);
 
     // convert a data em apenas horas com o acrescimo de 2 horas
     if (getHours(parseDate) + 2 <= '08' || getHours(parseDate) + 2 >= '18') {
@@ -58,6 +61,49 @@ class DeliveryOrdersController {
     }
 
     // return res.json(parseDate);
+
+    /**
+     * Verifica a quantidade de retiras no dia, não pode ser mais que 5
+     */
+
+    // if (getHours(parseDate) + 2 <= '08' || getHours(parseDate) + 2 >= '18') {
+    // /colocar aquia  validação
+    // }
+
+    const dateDay = new Date();
+    // const dateDay = subHours(parseISO(dateDay1), 2);
+
+    /* const countOrderDay = await Order.findAll({
+      attributes: [[fn('count', col('start_date')), 'countOrder']],
+      where: {
+        start_date: {
+          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
+        },
+        deliveryman_id: req.params.id,
+      },
+      // raw: true, // traz somente o resultado
+    }); */
+
+    const countOrderDay = await Order.findAndCountAll({
+      where: {
+        start_date: {
+          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
+        },
+        deliveryman_id: req.params.id,
+      },
+    });
+
+    if (countOrderDay.count > 5) {
+      return res
+        .status(400)
+        .json({ error: 'Only 5 retirees are allowed per delivery person.' });
+    }
+
+    // console.log(dateDay);
+    console.log(countOrderDay.count);
+
+    // const dateD = Date(parseISO('yyyy-MM-dd'));
+    // console.log(dateD);
 
     /**
      * Busca ordens em aberto para entrega que não estejam canceladas
