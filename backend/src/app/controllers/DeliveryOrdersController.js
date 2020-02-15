@@ -44,7 +44,7 @@ class DeliveryOrdersController {
      */
     const { start_date } = req.body;
 
-    // convert a data em apenas horas com o decrescimo de 2 horas subHours
+    // convert a data em apenas horas com o decrescimo de 3 horas subHours
     const parseDate = subHours(parseISO(start_date), 3);
 
     const parseDate1 = parseISO(start_date);
@@ -52,9 +52,10 @@ class DeliveryOrdersController {
 
     console.log(startOfDay(znDate));
     console.log(parseDate);
+    console.log(getHours(parseDate) + 3);
 
-    // convert a data em apenas horas com o acrescimo de 2 horas
-    if (getHours(parseDate) + 2 <= '08' || getHours(parseDate) + 2 >= '18') {
+    // convert a data em apenas horas com o acrescimo de 3 horas
+    if (getHours(parseDate) + 3 <= '08' || getHours(parseDate) + 3 >= '18') {
       return res
         .status(400)
         .json({ error: 'Products can be picked up between 08:00 and 18:00.' });
