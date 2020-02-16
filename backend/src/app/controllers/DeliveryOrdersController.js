@@ -18,6 +18,8 @@ import Signature from '../models/Signature';
 
 class DeliveryOrdersController {
   async index(req, res) {
+    const { page } = req.query;
+
     const { id } = req.params;
     const checkDelivery = await Deliveryman.findByPk(id);
 
@@ -28,11 +30,12 @@ class DeliveryOrdersController {
     }
 
     const orders = await Order.findAll({
+      limit: 20,
+      offset: (page - 1) * 20,
       where: {
         deliveryman_id: id,
         start_date: null,
         canceled_at: null,
-        end_date: null,
       },
       order: [['id', 'DESC']],
     });
@@ -96,7 +99,7 @@ class DeliveryOrdersController {
     const {
       deliveryman_id,
       recipient_id,
-      end_date,
+      // end_date,
       signature_id,
       canceled_at,
     } = await orderExist.update(req.body);
@@ -105,10 +108,55 @@ class DeliveryOrdersController {
       deliveryman_id,
       recipient_id,
       start_date,
-      end_date,
+      // end_date,
       signature_id,
       canceled_at,
     });
+  }
+
+  async show(req, res) {
+    /**
+     * Verifica se o signature_id ainda não foi preenchido
+     */
+    const { id, idOrder } = req.params;
+
+    const orderSignatureNull = await Order.findByPk(idOrder, {
+      where: {
+        deliveryman_id: id,
+        canceled_at: null,
+        start_date: { [Op.ne]: null },
+        signature_id: null,
+      },
+    });
+
+    orderSignatureNull.update(req.body);
+
+    /**
+     * Verifica se o signature_id foi preenchido para atualizar o end_date
+     */
+    const orderSignature = await Order.findByPk(idOrder, {
+      include: [
+        {
+          model: Signature,
+          as: 'signature',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+      where: {
+        deliveryman_id: id,
+        canceled_at: null,
+        start_date: { [Op.ne]: null },
+        signature_id: { [Op.ne]: null },
+      },
+    });
+
+    if (orderSignature) {
+      orderSignature.end_date = new Date();
+      await orderSignature.save();
+      // return res.json(orderSignature);
+    }
+
+    return res.json(orderSignature);
   }
 }
 export default new DeliveryOrdersController();

@@ -6,6 +6,8 @@ import Signature from '../models/Signature';
 
 class DeliveriesController {
   async index(req, res) {
+    const { page } = req.query;
+
     const { id } = req.params;
     const checkDelivery = await Deliveryman.findByPk(id);
 
@@ -23,6 +25,8 @@ class DeliveriesController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      limit: 20,
+      offset: (page - 1) * 20,
       where: {
         deliveryman_id: id,
         canceled_at: null,

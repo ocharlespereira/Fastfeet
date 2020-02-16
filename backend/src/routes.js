@@ -25,6 +25,7 @@ routes.post('/signatures', upload.single('file'), SignatureController.store);
  */
 routes.get('/delivery/:id/orders', DeliveryOrdersController.index);
 routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
+routes.put('/delivered/:id/orders/:idOrder', DeliveryOrdersController.show);
 
 /**
  * Entregas realizadas pelos entregadores
