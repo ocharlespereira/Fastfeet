@@ -39,6 +39,7 @@ routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
 
 routes.get('/delivery/:idOrder/problems', ProblemController.index);
 routes.post('/delivery/:idOrder/problems', ProblemController.store);
+routes.delete('/problem/:idOrder/cancel-delivery', ProblemController.delete);
 
 /**
  * Acesso a Usuários autenticados (Admins)

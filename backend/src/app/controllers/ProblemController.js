@@ -1,4 +1,4 @@
-// import { startOfHour, endOfHour, parseISO, isBefore } from 'date-fns';
+import { Op } from 'sequelize';
 
 import Order from '../models/Order';
 import Problem from '../models/Problem';
@@ -21,19 +21,6 @@ class ProblemController {
 
     const problem = await Problem.findOne({
       attributes: ['delivery_id', 'description'],
-      /* include: [
-        {
-          model: Order,
-          as: 'order',
-          attributes: [
-            'id',
-            'product',
-            'start_date',
-            'end_date',
-            'signature_id',
-          ],
-        },
-      ], */
       where: {
         delivery_id: idOrder,
       },
@@ -60,6 +47,41 @@ class ProblemController {
     });
 
     return res.json(problem);
+  }
+
+  async delete(req, res) {
+    const { idOrder } = req.params;
+
+    const order = await Order.findOne({ where: { id: idOrder } });
+
+    if (!order) {
+      return res.status(400).json({ error: 'Order already not exists.' });
+    }
+
+    /**
+     * Cancela a entrega e atualiza o campo canceled_at para a data atual
+     */
+    const orderCancel = await Order.findByPk(idOrder, {
+      include: [
+        {
+          model: Signature,
+          as: 'signature',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+      where: {
+        id: idOrder,
+        canceled_at: null,
+        start_date: { [Op.ne]: null },
+      },
+    });
+
+    if (orderCancel) {
+      orderCancel.canceled_at = new Date();
+      await orderCancel.save();
+    }
+
+    return res.status(200).json(orderCancel);
   }
 }
 export default new ProblemController();
