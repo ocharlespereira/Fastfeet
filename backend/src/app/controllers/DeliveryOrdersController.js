@@ -1,6 +1,7 @@
 // import * as Yup from 'yup';
 import { parseISO, getHours, subHours, startOfDay, endOfDay } from 'date-fns';
 import { Op } from 'sequelize';
+import { zonedTimeToUtc, utcToZonedTime, format } from 'date-fns-tz';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -20,6 +21,18 @@ class DeliveryOrdersController {
     const { id } = req.params;
     const checkDelivery = await Deliveryman.findByPk(id);
 
+    const utcDate = zonedTimeToUtc(new Date(), 'America/Fortaleza');
+
+    // console.log(utcDate);
+
+    // Obtain a Date instance that will render the equivalent Berlin time for the UTC date
+    const dateSP = new Date();
+    const timeZone = 'America/Fortaleza';
+    const zonedDate = utcToZonedTime(dateSP, timeZone);
+    // zonedDate could be used to initialize a date picker or display the formatted local date/time
+
+    console.log(zonedDate);
+
     if (!checkDelivery) {
       return res
         .status(401)
@@ -29,9 +42,11 @@ class DeliveryOrdersController {
     const orders = await Order.findAll({
       where: {
         deliveryman_id: id,
+        start_date: null,
         canceled_at: null,
         end_date: null,
       },
+      order: [['id', 'DESC']],
     });
 
     return res.json(orders);
@@ -61,11 +76,12 @@ class DeliveryOrdersController {
         start_date: {
           [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
         },
+        canceled_at: null,
         deliveryman_id: req.params.id,
       },
     });
 
-    if (countOrderDay.count > 5) {
+    if (countOrderDay.count >= 5) {
       return res
         .status(400)
         .json({ error: 'Only 5 retirees are allowed per delivery person.' });
@@ -95,7 +111,9 @@ class DeliveryOrdersController {
       end_date,
       signature_id,
       canceled_at,
-    } = await orderExist.update({});
+    } = await orderExist.update(req.body);
+
+    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
 
     return res.json({
       deliveryman_id,
