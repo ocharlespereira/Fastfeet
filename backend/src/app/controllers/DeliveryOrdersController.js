@@ -101,8 +101,6 @@ class DeliveryOrdersController {
       canceled_at,
     } = await orderExist.update(req.body);
 
-    console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
-
     return res.json({
       deliveryman_id,
       recipient_id,
