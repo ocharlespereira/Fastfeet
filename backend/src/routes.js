@@ -11,6 +11,7 @@ import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveriesController from './app/controllers/DeliveriesController';
 import OrderController from './app/controllers/OrderController';
 import DeliveryOrdersController from './app/controllers/DeliveryOrdersController';
+import ProblemController from './app/controllers/ProblemController';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -31,6 +32,12 @@ routes.put('/delivered/:id/orders/:idOrder', DeliveryOrdersController.show);
  * Entregas realizadas pelos entregadores
  */
 routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
+
+/**
+ * Problemas nas Entregas
+ */
+
+routes.get('/delivery/:id/problems', ProblemController.index);
 
 routes.use(authMiddleware);
 

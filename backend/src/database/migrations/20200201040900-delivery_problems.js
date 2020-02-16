@@ -3,8 +3,10 @@ module.exports = {
     return queryInterface.createTable('delivery_problems', {
       delivery_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        primaryKey: true,
+        allowNull: true,
+        references: { model: 'orders', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       description: {
         type: Sequelize.STRING,
