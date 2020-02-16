@@ -8,6 +8,7 @@ import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
 import SignatureController from './app/controllers/SignatureController';
 import DeliverymanController from './app/controllers/DeliverymanController';
+import DeliveriesController from './app/controllers/DeliveriesController';
 import OrderController from './app/controllers/OrderController';
 import DeliveryOrdersController from './app/controllers/DeliveryOrdersController';
 
@@ -24,6 +25,11 @@ routes.post('/signatures', upload.single('file'), SignatureController.store);
  */
 routes.get('/delivery/:id/orders', DeliveryOrdersController.index);
 routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
+
+/**
+ * Entregas realizadas pelos entregadores
+ */
+routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
 
 routes.use(authMiddleware);
 

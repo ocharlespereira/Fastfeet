@@ -21,18 +21,6 @@ class DeliveryOrdersController {
     const { id } = req.params;
     const checkDelivery = await Deliveryman.findByPk(id);
 
-    const utcDate = zonedTimeToUtc(new Date(), 'America/Fortaleza');
-
-    // console.log(utcDate);
-
-    // Obtain a Date instance that will render the equivalent Berlin time for the UTC date
-    const dateSP = new Date();
-    const timeZone = 'America/Fortaleza';
-    const zonedDate = utcToZonedTime(dateSP, timeZone);
-    // zonedDate could be used to initialize a date picker or display the formatted local date/time
-
-    console.log(zonedDate);
-
     if (!checkDelivery) {
       return res
         .status(401)
