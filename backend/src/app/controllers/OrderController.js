@@ -114,7 +114,7 @@ class OrderController {
     const orderExists = await Order.findOne({ where: { id } });
 
     if (!orderExists) {
-      return res.status(400).json({ error: 'Order not exists.' });
+      return res.status(400).json({ error: 'Order already not exists.' });
     }
 
     // Verifica se o recipientId está cadastrado na tabela recipients
