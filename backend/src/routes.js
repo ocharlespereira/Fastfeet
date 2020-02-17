@@ -66,7 +66,7 @@ routes.put('/orders/:id', OrderController.update);
 routes.delete('/orders/:id', OrderController.delete);
 
 /**
- * Cancelamento de pedido
+ * Cancelamento de entrega com problema.
  */
 routes.delete('/problem/:idOrder/cancel-delivery', ProblemController.delete);
 

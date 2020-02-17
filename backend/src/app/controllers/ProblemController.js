@@ -15,11 +15,24 @@ class ProblemController {
     // const { page = 1 } = req.query;
 
     const { idOrder } = req.params;
-
-    const order = await Order.findByPk(idOrder);
+    /**
+     * Verifica se existe Ordem de entrega cadastrado
+     */
+    const order = await Order.findOne({ where: { id: idOrder } });
 
     if (!order) {
       return res.status(400).json({ error: 'Order already not exists.' });
+    }
+
+    /**
+     * Verifica se existe a notificação cadastrado
+     */
+    const problemExist = await Problem.findOne({
+      where: { delivery_id: idOrder },
+    });
+
+    if (!problemExist) {
+      return res.status(400).json({ error: 'Problem already not exists.' });
     }
 
     const problem = await Problem.findOne({
@@ -34,11 +47,24 @@ class ProblemController {
 
   async store(req, res) {
     const { idOrder } = req.params;
-
+    /**
+     * Verifica se existe Ordem de entrega cadastrado
+     */
     const order = await Order.findOne({ where: { id: idOrder } });
 
     if (!order) {
       return res.status(400).json({ error: 'Order already not exists.' });
+    }
+
+    /**
+     * Verifica se existe a notificação cadastrado
+     */
+    const problemExist = await Problem.findOne({
+      where: { delivery_id: idOrder },
+    });
+
+    if (!problemExist) {
+      return res.status(400).json({ error: 'Problem already not exists.' });
     }
 
     const { id, description } = req.body;
@@ -54,11 +80,24 @@ class ProblemController {
 
   async delete(req, res) {
     const { idOrder } = req.params;
-
+    /**
+     * Verifica se existe Ordem de entrega cadastrado
+     */
     const order = await Order.findOne({ where: { id: idOrder } });
 
     if (!order) {
       return res.status(400).json({ error: 'Order already not exists.' });
+    }
+
+    /**
+     * Verifica se existe a notificação cadastrado
+     */
+    const problemExist = await Problem.findOne({
+      where: { delivery_id: idOrder },
+    });
+
+    if (!problemExist) {
+      return res.status(400).json({ error: 'Problem already not exists.' });
     }
 
     /**
