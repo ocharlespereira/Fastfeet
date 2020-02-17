@@ -6,8 +6,9 @@ import Order from '../models/Order';
 import Problem from '../models/Problem';
 import Deliveryman from '../models/Deliveryman';
 import Signature from '../models/Signature';
-import File from '../models/File';
 import Notification from '../schemas/Notification';
+
+import Mail from '../../lib/Mail';
 
 class ProblemController {
   async index(req, res) {
@@ -145,6 +146,16 @@ class ProblemController {
         `Prezado ${delivery.name} o cancelamento correspondente a entrega ` +
         `${orderCancel.id} encontra-se com status cancelado no ${formattedDate}`,
       deliveryman: orderCancel.deliveryman_id,
+    });
+
+    /**
+     * Envio de email
+     */
+
+    await Mail.sendMail({
+      to: `${delivery.name} <${delivery.email}>`,
+      subject: `Entrega Cancelada!!!`,
+      text: 'Entrega cancelada com sucesso.',
     });
 
     return res.status(200).json(orderCancel);
