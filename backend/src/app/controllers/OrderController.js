@@ -9,6 +9,8 @@ import Signature from '../models/Signature';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
+import Mail from '../../lib/Mail';
+
 class OrderController {
   async index(req, res) {
     // paginação
@@ -107,6 +109,16 @@ class OrderController {
       "'dia' dd 'de' MMMM 'de' yyyy', às' H:mm'h.'",
       { locale: pt }
     );
+
+    /**
+     * Envio de email
+     */
+
+    await Mail.sendMail({
+      to: `${delivery.name} <${delivery.email}>`,
+      subject: `Novo Cadastro de Entrega`,
+      text: 'Você tem uma nova entrega com status pendente',
+    });
 
     await Notification.create({
       content: `Novo agendamento para o ${delivery.name} no ${formattedDate}`,
