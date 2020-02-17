@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class DeliverymanController {
   async index(req, res) {
@@ -40,6 +41,10 @@ class DeliverymanController {
     }
 
     const { name, avatar_id } = await Deliveryman.create(req.body);
+
+    /**
+     * Notificar deliveryman
+     */
 
     return res.json({
       id,

@@ -1,11 +1,13 @@
 import * as Yup from 'yup';
-// import { startOfHour, endOfHour, parseISO, isBefore } from 'date-fns';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import Signature from '../models/Signature';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class OrderController {
   async index(req, res) {
@@ -90,6 +92,26 @@ class OrderController {
     }
 
     const { id, product } = await Order.create(req.body);
+
+    /**
+     * Notificar deliveryman
+     */
+    const delivery = await Deliveryman.findByPk(deliveryman_id);
+    const orderDate = await Order.findByPk(id);
+
+    // const parseDate = subHours(parseISO(orderDate.created_at), 3);
+    const parseDate = orderDate.created_at;
+
+    const formattedDate = format(
+      parseDate,
+      "'dia' dd 'de' MMMM 'de' yyyy', às' H:mm'h.'",
+      { locale: pt }
+    );
+
+    await Notification.create({
+      content: `Novo agendamento para o ${delivery.name} no ${formattedDate}`,
+      deliveryman: deliveryman_id,
+    });
 
     return res.json({
       id,
