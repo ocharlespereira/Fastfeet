@@ -1,10 +1,13 @@
 import { Op } from 'sequelize';
+import { format } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import Order from '../models/Order';
 import Problem from '../models/Problem';
 import Deliveryman from '../models/Deliveryman';
 import Signature from '../models/Signature';
 import File from '../models/File';
+import Notification from '../schemas/Notification';
 
 class ProblemController {
   async index(req, res) {
@@ -76,10 +79,34 @@ class ProblemController {
       },
     });
 
+    /**
+     * Salva data de cancelamento
+     */
     if (orderCancel) {
       orderCancel.canceled_at = new Date();
       await orderCancel.save();
     }
+
+    /**
+     * Notificar deliveryman
+     */
+    const delivery = await Deliveryman.findByPk(orderCancel.deliveryman_id);
+
+    // const parseDate = subHours(parseISO(orderDate.created_at), 3);
+    const parseDate = orderCancel.canceled_at;
+
+    const formattedDate = format(
+      parseDate,
+      "'dia' dd 'de' MMMM 'de' yyyy', às' H:mm'h.'",
+      { locale: pt }
+    );
+
+    await Notification.create({
+      content:
+        `Prezado ${delivery.name} o cancelamento correspondente a entrega ` +
+        `${orderCancel.id} encontra-se com status cancelado no ${formattedDate}`,
+      deliveryman: orderCancel.deliveryman_id,
+    });
 
     return res.status(200).json(orderCancel);
   }
