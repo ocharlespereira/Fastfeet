@@ -7,6 +7,6 @@ export default {
     pass: '9b3b49bd2a49ab',
   },
   default: {
-    from: 'Distruidora FastFeet <noreplay@fastfeet.com.br>',
+    from: 'Distribuidora FastFeet <noreplay@fastfeet.com.br>',
   },
 };

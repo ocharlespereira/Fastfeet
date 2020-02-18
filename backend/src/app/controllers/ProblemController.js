@@ -5,6 +5,7 @@ import pt from 'date-fns/locale/pt';
 import Order from '../models/Order';
 import Problem from '../models/Problem';
 import Deliveryman from '../models/Deliveryman';
+import Recipient from '../models/Recipient';
 import Signature from '../models/Signature';
 import Notification from '../schemas/Notification';
 
@@ -111,6 +112,20 @@ class ProblemController {
           as: 'signature',
           attributes: ['id', 'path', 'url'],
         },
+        {
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'street',
+            'number',
+            'complement',
+            'city',
+            'state',
+            'cep',
+          ],
+        },
       ],
       where: {
         id: idOrder,
@@ -151,11 +166,27 @@ class ProblemController {
     /**
      * Envio de email
      */
+    const addressRecipient = `${orderCancel.recipient.street}, 
+                              ${orderCancel.recipient.number}, 
+                              ${orderCancel.recipient.cep}, 
+                              ${orderCancel.recipient.complement}, 
+                              ${orderCancel.recipient.city}-
+                              ${orderCancel.recipient.state}`;
+
+    console.log(addressRecipient);
 
     await Mail.sendMail({
       to: `${delivery.name} <${delivery.email}>`,
       subject: `Entrega Cancelada!!!`,
-      text: 'Entrega cancelada com sucesso.',
+      template: 'cancelordermail',
+      context: {
+        namehbs: orderCancel.name,
+        recipienthbs: orderCancel.recipient.name,
+        addresshbs: addressRecipient,
+        orderhbs: orderCancel.id,
+        datehbs: formattedDate,
+        producthbs: orderCancel.product,
+      },
     });
 
     return res.status(200).json(orderCancel);

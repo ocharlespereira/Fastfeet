@@ -113,11 +113,22 @@ class OrderController {
     /**
      * Envio de email
      */
+    const addressRecipient = `${recipient.street}, ${recipient.number}, 
+                              ${recipient.cep}, ${recipient.complement}, 
+                              ${recipient.city}-${recipient.state}`;
 
     await Mail.sendMail({
       to: `${delivery.name} <${delivery.email}>`,
       subject: `Novo Cadastro de Entrega`,
-      text: 'Você tem uma nova entrega com status pendente',
+      template: 'deliveryordermail',
+      context: {
+        namehbs: delivery.name,
+        recipienthbs: recipient.name,
+        addresshbs: addressRecipient,
+        orderhbs: orderDate.id,
+        datehbs: formattedDate,
+        producthbs: orderDate.product,
+      },
     });
 
     await Notification.create({
