@@ -9,7 +9,8 @@ import Signature from '../models/Signature';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
-import Mail from '../../lib/Mail';
+import DeliveryOrderMail from '../jobs/DeliveryOrderMail';
+import Queue from '../../lib/Queue';
 
 class OrderController {
   async index(req, res) {
@@ -117,18 +118,13 @@ class OrderController {
                               ${recipient.cep}, ${recipient.complement}, 
                               ${recipient.city}-${recipient.state}`;
 
-    await Mail.sendMail({
-      to: `${delivery.name} <${delivery.email}>`,
-      subject: `Novo Cadastro de Entrega`,
-      template: 'deliveryordermail',
-      context: {
-        namehbs: delivery.name,
-        recipienthbs: recipient.name,
-        addresshbs: addressRecipient,
-        orderhbs: orderDate.id,
-        datehbs: formattedDate,
-        producthbs: orderDate.product,
-      },
+    // chamada queue de filas
+    await Queue.add(DeliveryOrderMail.key, {
+      delivery,
+      orderDate,
+      formattedDate,
+      recipient,
+      addressRecipient,
     });
 
     await Notification.create({

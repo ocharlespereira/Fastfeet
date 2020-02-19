@@ -9,7 +9,8 @@ import Recipient from '../models/Recipient';
 import Signature from '../models/Signature';
 import Notification from '../schemas/Notification';
 
-import Mail from '../../lib/Mail';
+import CancelOrderMail from '../jobs/CancelOrderMail';
+import Queue from '../../lib/Queue';
 
 class ProblemController {
   async index(req, res) {
@@ -173,20 +174,13 @@ class ProblemController {
                               ${orderCancel.recipient.city}-
                               ${orderCancel.recipient.state}`;
 
-    console.log(addressRecipient);
-
-    await Mail.sendMail({
-      to: `${delivery.name} <${delivery.email}>`,
-      subject: `Entrega Cancelada!!!`,
-      template: 'cancelordermail',
-      context: {
-        namehbs: orderCancel.name,
-        recipienthbs: orderCancel.recipient.name,
-        addresshbs: addressRecipient,
-        orderhbs: orderCancel.id,
-        datehbs: formattedDate,
-        producthbs: orderCancel.product,
-      },
+    // chamada queue de filas
+    await Queue.add(CancelOrderMail.key, {
+      delivery,
+      orderCancel,
+      recipientName: orderCancel.recipient.name,
+      addressRecipient,
+      formattedDate,
     });
 
     return res.status(200).json(orderCancel);
