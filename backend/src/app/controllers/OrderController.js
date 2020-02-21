@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { Op } from 'sequelize';
 
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
@@ -15,7 +16,7 @@ import Queue from '../../lib/Queue';
 class OrderController {
   async index(req, res) {
     // paginação
-    const { page = 1 } = req.query;
+    const { page = 1, nameProductLike } = req.query;
 
     const order = await Order.findAll({
       attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
@@ -54,6 +55,12 @@ class OrderController {
           attributes: ['id', 'path', 'url'],
         },
       ],
+      where: {
+        product: {
+          [Op.like]: `%${nameProductLike}%`,
+        },
+      },
+      order: [['id', 'ASC']],
     });
 
     return res.json(order);
