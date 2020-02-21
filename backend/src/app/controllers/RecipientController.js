@@ -5,7 +5,7 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const { nameLike } = req.query;
+    const { page = 1, nameLike } = req.query;
 
     const recipient = await Recipient.findAll({
       attributes: [
@@ -18,6 +18,8 @@ class RecipientController {
         'state',
         'cep',
       ],
+      limit: 20,
+      offset: (page - 1) * 20,
       where: {
         name: {
           [Op.iLike]: `%${nameLike}%`,
