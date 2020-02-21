@@ -57,7 +57,7 @@ class OrderController {
       ],
       where: {
         product: {
-          [Op.like]: `%${nameProductLike}%`,
+          [Op.iLike]: `%${nameProductLike}%`,
         },
       },
       order: [['id', 'ASC']],
