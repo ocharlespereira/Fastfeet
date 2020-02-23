@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import logo from '~/assets/logo.svg';
+import { signInRequest } from '~/store/modules/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -13,15 +15,17 @@ const schema = Yup.object().shape({
 });
 
 export default function SignIn() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (
     <>
       <img src={logo} alt="FastFeet" />
 
-      <Form onSubmit={handleSubmit} schema={schema}>
+      <Form schema={schema} onSubmit={handleSubmit}>
         <div>
           <strong>SEU E-MAIL</strong>
           <Input name="email" type="email" placeholder="exemplo@email.com" />
