@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -44,8 +45,8 @@ export const Content = styled.div`
   input {
     width: 300px;
     height: 40px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 1px solid #dddddd;
+    background: #ffff;
+    border: 1px solid #dddd;
     border-radius: 4px;
     opacity: 1;
     padding: 10px;
@@ -63,5 +64,10 @@ export const Content = styled.div`
     font-weight: bold;
     font-size: 16px;
     color: #fff;
+    transition: background 0.2s;
+
+    &:hover {
+      background: ${darken(0.15, '#7d40e7')};
+    }
   }
 `;
