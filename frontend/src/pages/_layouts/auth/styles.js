@@ -27,15 +27,14 @@ export const Content = styled.div`
   }
 
   div {
-    padding: 10px;
+    padding: 10px 10px 30px 10px;
     text-align: center;
     flex-direction: column;
   }
 
-  span {
+  strong {
     text-align: left;
     display: flex;
-    margin-bottom: 9px;
     margin-left: 20px;
     color: #444444;
     font-weight: bold;
@@ -43,6 +42,7 @@ export const Content = styled.div`
   }
 
   input {
+    display: flex;
     width: 300px;
     height: 40px;
     background: #ffff;
@@ -51,7 +51,16 @@ export const Content = styled.div`
     opacity: 1;
     padding: 10px;
     color: #666;
-    margin: 0 0 15px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: flex;
+    color: #de3b3b;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 20px;
   }
 
   button {
