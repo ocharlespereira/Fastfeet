@@ -1,41 +1,68 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import logo from '~/assets/logo.svg';
+import logoHeader from '~/assets/logoHeader.svg';
+import { signOut } from '~/store/modules/auth/actions';
+import colors from '~/styles/colors';
 
 import { Container, Content, Profile, Menu } from './styles';
 
 export default function Header() {
+  const profile = useSelector(state => state.user.profile);
+  const dispatch = useDispatch();
+
+  function handleSignOut() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
       <Content>
         <nav>
           <Link to="/dashboard">
-            <img src={logo} alt="Fastfeet" />
+            <img src={logoHeader} alt="Fastfeet" />
           </Link>
-        </nav>
 
-        <Menu>
           <ul>
             <li>
-              <Link to="/orders">ENCOMENDAS</Link>
+              <Menu activeStyle={{ colors: colors.linkActive }} to="/orders">
+                ENCOMENDAS
+              </Menu>
             </li>
             <li>
-              <Link to="/deliverymans">ENTREGADORES</Link>
+              <Menu
+                activeStyle={{ colors: colors.linkActive }}
+                to="/deliverymans"
+              >
+                ENTREGADORES
+              </Menu>
             </li>
             <li>
-              <Link to="/recipients">DESTINATÁRIOS</Link>
+              <Menu
+                activeStyle={{ colors: colors.linkActive }}
+                to="/recipients"
+              >
+                DESTINATÁRIOS
+              </Menu>
             </li>
             <li>
-              <Link to="/problems">PROBLEMAS</Link>
+              <Menu activeStyle={{ colors: colors.linkActive }} to="/problems">
+                PROBLEMAS
+              </Menu>
             </li>
           </ul>
-        </Menu>
+        </nav>
 
-        <Profile>
-          <strong>Admin Fastfeet</strong>
-          <Link to="/">Sair do sistema</Link>
-        </Profile>
+        <aside>
+          <Profile>
+            <div>
+              <strong>{profile.name}</strong>
+              <span onClick={handleSignOut}>sair do sistema</span>
+            </div>
+          </Profile>
+        </aside>
       </Content>
     </Container>
   );
