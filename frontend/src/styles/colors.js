@@ -18,6 +18,7 @@ export default {
   input: '#999999',
   label: '#666666',
   strong: '#333',
+  title: '#444444',
 
   tableTd: '#666',
   tableBorder: '#eee',
