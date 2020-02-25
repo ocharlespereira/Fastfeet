@@ -3,23 +3,23 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  max-width: 100%;
+  height: 64px;
   background: #fff;
   padding: 0 30px;
   border: 2px solid #eee;
 `;
 
 export const Content = styled.div`
-  height: 64px;
-  width: 1440px;
-  max-width: 100%;
-  margin: 0 auto;
+  max-width: 1440px;
+  height: 63px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   nav {
     display: flex;
-    text-align: center;
 
     img {
       margin-right: 20px;
@@ -27,13 +27,17 @@ export const Content = styled.div`
       border-right: 1px solid #eee;
     }
 
-    ul {
+    div {
       display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
-
       li {
+        flex-direction: row;
         margin-right: 20px;
+        justify-content: center;
+        align-items: center;
+        display: inline;
       }
     }
   }
@@ -51,12 +55,13 @@ export const Menu = styled(NavLink).attrs(props => ({}))`
 
 export const Profile = styled.div`
   display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
+  max-width: 100%;
+  margin: auto;
+  height: 64px;
+  align-items: center;
 
   div {
     text-align: right;
-    margin-right: 10px;
 
     strong {
       display: block;

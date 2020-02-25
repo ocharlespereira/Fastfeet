@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  max-width: 100%;
-  margin: 30px 50px;
-  margin-left: 120px;
+  max-width: 1200px;
+  margin: 30px auto;
   display: flex;
   flex-direction: column;
 
@@ -85,32 +84,48 @@ export const OrderTable = styled.table`
   margin-bottom: 20px;
 
   thead th {
+    &:nth-child(1) {
+      align-items: left;
+        text-align: center;
+        width: 10%;
+      }
     &:nth-child(3) {
         width: 25%;
+      }
+
+      &:nth-child(7) {
+        align-items: right;
+        text-align: center;
       }
     margin-top: 15px;
     text-align: left;
     margin-bottom: 20px;
   }
-  tbody {
+  tbody td {
     background: #fff;
     border-top: 20px solid #f5f5f5;
-    
-    
-    td {
+
+    &:nth-child(1) {
+      align-items: center;
+        text-align: center;
+        width: 10%;
+      }    
       &:nth-child(3) {
         width: 25%;
+      }
+      &:nth-child(7) {
+        align-items: right;
+        text-align: center;
       }
       padding: 22px 0;
       margin: 10px 0;
       border-top: 10px solid #f5f5f5;
       border-bottom: 10px solid #f5f5f5;
       border-radius: 4px;
-      background: red;
 
-      p {
-        position: relative;
-        display: flex;
+      span {
+        padding: 7px;
+        margin-right: 5px;
         align-items: center;
         text-align: center;
         margin: left;
@@ -122,7 +137,31 @@ export const OrderTable = styled.table`
         font-weight: bold;
 
       }
-    }
+/** Status */
+      div {
+        padding: 3px 6px 3px 8px;
+        border-radius: 12px;
+        background: #BAD2FF;
+        text-align: left;
+        align-items: center;
+        max-width: 97px;
+
+        small {
+          text-transform: uppercase;
+          font-weight: bold;
+          color: #4D85EE;
+        }
+      }
+/** Menu */
+      button {
+        max-width: 20px;
+        border: none;
+        width: 100%;
+        background: none;
+        text-align: center;
+        align-items: center;
+      }
+    
   }
 
   tbody tr:last-child {

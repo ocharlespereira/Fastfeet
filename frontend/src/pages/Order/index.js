@@ -1,5 +1,6 @@
 import React from 'react';
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { GoKebabHorizontal } from 'react-icons/go';
+import { MdAdd, MdSearch, MdFiberManualRecord } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -47,21 +48,43 @@ export default function Profile() {
               <td>#01</td>
               <td>Janaina de Souza</td>
               <td>
-                <p>CP</p>Charles Pereira
+                <span>CH</span>
+                <strong>Charles Pereira</strong>
               </td>
               <td>Uberlandia</td>
               <td>Minas Gerais</td>
-              <td>Retirada</td>
-              <td>...</td>
+              <td>
+                <div>
+                  <MdFiberManualRecord size={10} color="#4D85EE" />
+                  <small>Retirada</small>
+                </div>
+              </td>
+              <td>
+                <button type="button">
+                  <GoKebabHorizontal size={20} color="#C6C6C6" />
+                </button>
+              </td>
             </tr>
             <tr>
               <td>#01</td>
               <td>Janaina de Souza</td>
-              <td>Charles Pereira</td>
+              <td>
+                <span>CH</span>
+                <strong>Charles Pereira</strong>
+              </td>
               <td>Uberlandia</td>
               <td>Minas Gerais</td>
-              <td>Retirada</td>
-              <td>...</td>
+              <td>
+                <div>
+                  <MdFiberManualRecord size={10} color="#4D85EE" />
+                  <small>Retirada</small>
+                </div>
+              </td>
+              <td>
+                <button type="button">
+                  <GoKebabHorizontal size={20} color="#C6C6C6" />
+                </button>
+              </td>
             </tr>
           </tbody>
         </OrderTable>

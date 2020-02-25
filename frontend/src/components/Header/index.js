@@ -25,7 +25,7 @@ export default function Header() {
             <img src={logoHeader} alt="Fastfeet" />
           </Link>
 
-          <ul>
+          <div>
             <li>
               <Menu activeStyle={{ colors: colors.linkActive }} to="/orders">
                 ENCOMENDAS
@@ -52,7 +52,7 @@ export default function Header() {
                 PROBLEMAS
               </Menu>
             </li>
-          </ul>
+          </div>
         </nav>
 
         <aside>
