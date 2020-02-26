@@ -94,11 +94,13 @@ export const OrderTable = styled.table`
       width: 10%;
       padding-left: 15px;
     }
-    &:nth-child(3) {
+    &:nth-child(2) {
       width: 30%;
     }
-    &:nth-child(5) {
-      width: 8%;
+    &:nth-child(3) {
+      width: 53%;
+    }
+    &:nth-child(4) {
       align-items: right;
       text-align: center;
     }
@@ -119,28 +121,15 @@ export const OrderTable = styled.table`
       width: 10%;
       padding-left: 15px;
     }
-    &:nth-child(3) {
+    &:nth-child(2) {
       width: 30%;
-      font-weight: 0;
     }
-    &:nth-child(5) {
-      width: 8%;
+    &:nth-child(3) {
+      width: 53%;
+    }
+    &:nth-child(4) {
       align-items: right;
       text-align: center;
-    }
-
-    span {
-      padding: 7px;
-      margin-right: 5px;
-      align-items: center;
-      text-align: center;
-      margin: left;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #ebfbfa;
-      color: #a28fd0;
-      font-weight: bold;
     }
   }
 `;

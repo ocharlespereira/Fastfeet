@@ -2,7 +2,7 @@ import React from 'react';
 import { MdAdd, MdSearch, MdFiberManualRecord } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import Action from '~/components/Action';
+import Action from '~/components/Actions/Order';
 
 import {
   Container,

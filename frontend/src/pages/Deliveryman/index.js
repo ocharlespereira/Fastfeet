@@ -2,7 +2,7 @@ import React from 'react';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-import ActionDeliveryman from '~/components/ActionDeliveryman';
+import ActionDeliveryman from '~/components/Actions/Deliveryman';
 
 import {
   Container,
@@ -47,9 +47,7 @@ export default function Deliveryman() {
               <td>
                 <span>CH</span>
               </td>
-              <td>
-                <strong>Charles Pereira</strong>
-              </td>
+              <td>Charles Pereira</td>
               <td>charles@teste.com</td>
               <td>
                 <ActionDeliveryman />
