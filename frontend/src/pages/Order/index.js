@@ -1,8 +1,8 @@
 import React from 'react';
-import { GoKebabHorizontal } from 'react-icons/go';
 import { MdAdd, MdSearch, MdFiberManualRecord } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
+import Action from '~/components/Action';
 
 import {
   Container,
@@ -54,15 +54,13 @@ export default function Profile() {
               <td>Uberlandia</td>
               <td>Minas Gerais</td>
               <td>
-                <div>
+                <div className="status">
                   <MdFiberManualRecord size={10} color="#4D85EE" />
                   <small>Retirada</small>
                 </div>
               </td>
               <td>
-                <button type="button">
-                  <GoKebabHorizontal size={20} color="#C6C6C6" />
-                </button>
+                <Action />
               </td>
             </tr>
             <tr>
@@ -75,15 +73,13 @@ export default function Profile() {
               <td>Uberlandia</td>
               <td>Minas Gerais</td>
               <td>
-                <div>
+                <div className="status">
                   <MdFiberManualRecord size={10} color="#4D85EE" />
                   <small>Retirada</small>
                 </div>
               </td>
               <td>
-                <button type="button">
-                  <GoKebabHorizontal size={20} color="#C6C6C6" />
-                </button>
+                <Action />
               </td>
             </tr>
           </tbody>
