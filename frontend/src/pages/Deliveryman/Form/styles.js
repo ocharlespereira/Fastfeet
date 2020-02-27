@@ -29,8 +29,6 @@ export const OrderControls = styled.div`
 export const OrderButtons = styled.div`
   display: flex;
   justify-content: space-between;
-  /* margin-top: 35px;
-  margin-bottom: 20px; */
 `;
 export const Button = styled.div`
   display: flex;
@@ -63,7 +61,7 @@ export const Button = styled.div`
   }
 
   &.secondary {
-    background: #ccc;
+    background: ${colors.disabled};
     &:hover {
       background: ${darken(0.08, '#ccc')};
     }
@@ -75,23 +73,29 @@ export const Content = styled.div`
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+
+  form {
+    text-align: left;
+
+    div {
+      display: row;
+      margin-bottom: 18px;
+
+      strong {
+        font-size: 14px;
+        color: ${colors.title};
+      }
+
+      input {
+        width: 840px;
+        height: 45px;
+        display: block;
+        background: #ffffff;
+        border: 1px solid ${colors.second};
+        border-radius: 4px;
+        padding: 12px 20px;
+        color: ${colors.input};
+      }
+    }
+  }
 `;
-// export const SearchInput = styled.div`
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   height: 36px;
-
-//   background: #fff;
-
-//   padding-left: 5px;
-//   border: 1px solid ${colors.second};
-//   border-radius: 4px;
-//   min-width: 235px;
-
-//   input {
-//     border: 0;
-//     height: 100%;
-//     color: ${colors.input};
-//   }
-// `;
