@@ -1,9 +1,11 @@
 import React from 'react';
-import { IoIosArrowBack, IoMdImages } from 'react-icons/io';
+import { IoIosArrowBack } from 'react-icons/io';
 import { MdDone } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
 import { Form, Input } from '@rocketseat/unform';
+
+import AvatarInput from '~/pages/Deliveryman/AvatarInput';
 
 import {
   Container,
@@ -11,7 +13,6 @@ import {
   OrderButtons,
   Button,
   Content,
-  Imagem,
 } from './styles';
 
 export default function DeliverymanForm() {
@@ -32,11 +33,7 @@ export default function DeliverymanForm() {
       </OrderControls>
 
       <Content>
-        <Imagem>
-          <img src="" alt="" />
-          <IoMdImages size={20} color="#FFF" />
-          <small>Adicionar foto</small>
-        </Imagem>
+        <AvatarInput name="avatar_id" />
 
         <Form>
           <div>

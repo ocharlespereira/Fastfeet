@@ -15,21 +15,19 @@ export const Container = styled.div`
     color: ${colors.title};
   }
 `;
-export const Imagem = styled.div``;
 
 export const OrderControls = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-bottom: 20px;
-  /* margin-top: 35px;
-  margin-bottom: 20px; */
 `;
+
 export const OrderButtons = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
 export const Button = styled.div`
   display: flex;
   align-items: center;
