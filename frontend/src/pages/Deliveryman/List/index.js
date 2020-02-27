@@ -13,7 +13,7 @@ import {
   OrderTable,
 } from './styles';
 
-export default function Deliveryman() {
+export default function DeliverymanList() {
   return (
     <Container>
       <h1>Gerenciando entregadores</h1>
@@ -23,7 +23,7 @@ export default function Deliveryman() {
           <MdSearch size={18} color="#999" />
           <input name="search" placeholder="Buscar por entregadores" />
         </SearchInput>
-        <Button as={Link} to="/orders/new">
+        <Button as={Link} to="/deliveryman/new">
           <MdAdd size={20} color="#FFF" />
           Cadastrar
         </Button>

@@ -23,7 +23,7 @@ export default function Profile() {
           <MdSearch size={18} color="#999" />
           <input name="search" placeholder="Buscar por encomenda" />
         </SearchInput>
-        <Button as={Link} to="/orders/new">
+        <Button as={Link} to="/deliverymans/new">
           <MdAdd size={20} color="#FFF" />
           Cadastrar
         </Button>
