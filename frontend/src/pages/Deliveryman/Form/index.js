@@ -28,14 +28,63 @@ export default function DeliverymanForm({match}) {
     loadInitialData(id);
   }, [id]);
 
+  async function handleSubmit(data, {reset}) {
+    formRef.current.setErrors({});
+    
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required('O nome é obrigatório'),
+        email: Yup.string().email().required('O email é obrigatório'),        
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      })
+
+      const dataFile = new FormData();
+
+      dataFile.append('file', data.avatar);
+
+      const resFile = data.avatar ? await api.post('files', dataFile) : null;
+
+      if (id) {
+        await api.put(`/deliveryman/${id}`, {
+          name: data.name,
+          email: data.email,
+          avatar_id: resFile?.data?.id,
+        });
+        toast.success('Entregador editado com sucesso!');
+      } else {
+        await api.post('/deliverymans', {
+          name: data.name,
+          email: data.email,
+          avatar_id: resFile?.data?.id,
+        });
+        toast.success('Entregador criado com sucesso!');
+      }
+
+      reset();
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        error.inner.forEach(error => {
+          errorMessages[error.path] = error.message
+        });
+
+        formRef.current.setErrors(errorMessages)
+      }
+    }
+  }
+
   return (
     <Container>
       <Content>
         <HeaderForm title="Cadastro de entregadores">
           <BackButton />
-          <SaveButton action="" />
+          <SaveButton action={() => formRef.current.submitForm()} />
         </HeaderForm>
-        <UnForm>
+        <UnForm ref={formRef} onSubmit={handleSubmit}>
           <ImageInput name="avatar" />
           <InputSimple
             label="name"
