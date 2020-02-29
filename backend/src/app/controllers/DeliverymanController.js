@@ -8,7 +8,7 @@ class DeliverymanController {
   async index(req, res) {
     const { page = 1, nameLike } = req.query;
 
-    const delivery = await Deliveryman.findAll({
+    const delivery = nameLike ? await Deliveryman.findAll({
       attributes: ['id', 'name', 'email', 'avatar_id'],
       limit: 20,
       offset: (page - 1) * 20,
@@ -19,24 +19,37 @@ class DeliverymanController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      where: {
+	  where: {
         name: {
           [Op.iLike]: `%${nameLike}%`,
         },
       },
       order: [['id', 'ASC']],
-    });
+    }) :
+        await Deliveryman.findAll({
+            attributes: ['id', 'name', 'email', 'avatar_id'],
+            limit: 20,
+            offset: (page - 1) * 20,
+            include: [
+              {
+                model: File,
+                as: 'avatar',
+                attributes: ['id', 'path', 'url'],
+              },
+            ],
+            order: [['id', 'ASC']],
+          });
 
-    return res.json(delivery);
-  }
+          return res.json(delivery);
+        }
 
-  async store(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string().required(),
-      email: Yup.string()
-        .email()
-        .required(),
-    });
+        async store(req, res) {
+          const schema = Yup.object().shape({
+            name: Yup.string().required(),
+            email: Yup.string()
+              .email()
+              .required(),
+          });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails.' });

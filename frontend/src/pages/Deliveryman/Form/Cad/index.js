@@ -8,6 +8,7 @@ import Proptypes from 'prop-types';
 import { SaveButton, BackButton } from '~/components/Button';
 import { InputSimple, ImageInput } from '~/components/Form';
 import HeaderForm from '~/components/HeaderForm';
+import history from '~/services/history';
 
 import { Container, Content, UnForm } from './styles';
 
@@ -81,7 +82,7 @@ export default function DeliverymanForm({match}) {
     <Container>
       <Content>
         <HeaderForm title="Cadastro de entregadores">
-          <BackButton />
+          <BackButton action={() => history.push('/deliverymans')} />
           <SaveButton action={() => formRef.current.submitForm()} />
         </HeaderForm>
         <UnForm ref={formRef} onSubmit={handleSubmit}>

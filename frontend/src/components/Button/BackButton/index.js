@@ -1,16 +1,14 @@
 import React from 'react';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 
-import history from '~/services/history';
-
 import IconButton from '../IconButton';
 
-export default function BackButton() {
+export default function BackButton({ action }) {
   return (
     <IconButton
       title="VOLTAR"
       Icon={MdKeyboardArrowLeft}
-      action={history.back}
+      action={action}
       background="#CCC"
     />
   );

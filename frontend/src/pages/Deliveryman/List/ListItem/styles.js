@@ -14,10 +14,10 @@ export const Container = styled.div`
   margin-bottom: 20px;
 
   img {
-    width: 35px;
+    /* width: 35px;
     height: 35px;
     align-self: center;
-    border-radius: 50%;
+    border-radius: 50%; */
   }
 
   > small {
