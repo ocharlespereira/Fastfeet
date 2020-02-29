@@ -4,13 +4,13 @@ import { toast } from 'react-toastify';
 
 import PropTypes from 'prop-types';
 
-import More from '~/components/MorePopUp';
+import Action from '~/components/ActionPopUp';
 import PhotoName from '~/components/PhotoName';
 import api from '~/services/api';
 import history from '~/services/history';
 import { colors } from '~/styles/colors';
 
-import { Container, MoreContainer } from './styles';
+import { Container, ActionContainer } from './styles';
 
 const name = 'Charles Pereira';
 export default function DeliverymanItem() {
@@ -20,8 +20,8 @@ export default function DeliverymanItem() {
       <PhotoName name={name} />
       <small>Charles Pereira</small>
       <small>charles@teste.com</small>
-      <More>
-        <MoreContainer>
+      <Action>
+        <ActionContainer>
           <div>
             <button type="button">
               <MdEdit color={colors.info} size={15} />
@@ -32,11 +32,11 @@ export default function DeliverymanItem() {
           <div>
             <button type="button">
               <MdDeleteForever color={colors.danger} size={15} />
-              <span>Editar</span>
+              <span>Excluir</span>
             </button>
           </div>
-        </MoreContainer>
-      </More>
+        </ActionContainer>
+      </Action>
     </Container>
   );
 }
