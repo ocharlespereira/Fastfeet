@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import logoHeader from '~/assets/logoHeader.svg';
 import { signOut } from '~/store/modules/auth/actions';
-import colors from '~/styles/colors';
 
 import { Container, Content, Profile, Menu } from './styles';
 
@@ -21,46 +20,21 @@ export default function Header() {
     <Container>
       <Content>
         <nav>
-          <Link to="/dashboard">
-            <img src={logoHeader} alt="Fastfeet" />
-          </Link>
-
-          <div>
-            <li>
-              <Menu activeStyle={{ colors: colors.linkActive }} to="/orders">
-                ENCOMENDAS
-              </Menu>
-            </li>
-            <li>
-              <Menu
-                activeStyle={{ colors: colors.linkActive }}
-                to="/deliverymans"
-              >
-                ENTREGADORES
-              </Menu>
-            </li>
-            <li>
-              <Menu
-                activeStyle={{ colors: colors.linkActive }}
-                to="/recipients"
-              >
-                DESTINATÁRIOS
-              </Menu>
-            </li>
-            <li>
-              <Menu activeStyle={{ colors: colors.linkActive }} to="/problems">
-                PROBLEMAS
-              </Menu>
-            </li>
-          </div>
+          <img src={logoHeader} alt="Fastfeet" />
+          <Menu>
+            <NavLink to="/orders">ENCOMENDAS</NavLink>
+            <NavLink to="/deliverymans">ENTREGADORES</NavLink>
+            <NavLink to="/recipients">DESTINATÁRIOS</NavLink>
+            <NavLink to="/problems">PROBLEMAS</NavLink>
+          </Menu>
         </nav>
 
         <aside>
           <Profile>
-            <div>
-              <strong>{profile.name}</strong>
-              <span onClick={handleSignOut}>sair do sistema</span>
-            </div>
+            <strong>{profile.name}</strong>
+            <button type="button" onClick={handleSignOut}>
+              sair do sistema
+            </button>
           </Profile>
         </aside>
       </Content>

@@ -1,76 +1,79 @@
-import { NavLink } from 'react-router-dom';
-
 import styled from 'styled-components';
+
+import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
   max-width: 100%;
-  height: 64px;
   background: #fff;
   padding: 0 30px;
-  border: 2px solid #eee;
+  border: 2px solid ${colors.border};
+  margin-bottom: 35px;
 `;
 
 export const Content = styled.div`
   max-width: 1440px;
-  height: 63px;
-  margin: auto;
+  height: 64px;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 
   nav {
     display: flex;
+    align-items: center;
 
     img {
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 1px solid #eee;
-    }
-
-    div {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      li {
-        flex-direction: row;
-        margin-right: 20px;
-        justify-content: center;
-        align-items: center;
-        display: inline;
-      }
+      width: 135px;
+      height: 26px;
+      margin-right: 30px;
     }
   }
-
   aside {
     display: flex;
     align-items: center;
   }
 `;
 
-export const Menu = styled(NavLink).attrs(props => ({}))`
-  font-weight: bold;
-  color: #999999;
+export const Menu = styled.div`
+  padding-left: 30px;
+  height: 32px;
+  border-left: 1px solid ${colors.border};
+
+  display: flex;
+  align-items: center;
+
+  a {
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: ${colors.input};
+    transition: color 0.2s;
+
+    &.active {
+      color: ${colors.title};
+    }
+  }
 `;
 
 export const Profile = styled.div`
   display: flex;
-  max-width: 100%;
-  margin: auto;
-  height: 64px;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-end;
 
-  div {
-    text-align: right;
+  strong {
+    font-weight: bold;
+    color: ${colors.label};
+    margin-bottom: 5px;
+  }
 
-    strong {
-      display: block;
-      color: #444444;
-    }
+  button {
+    border: 0;
+    background: none;
+    color: ${colors.danger};
+    transition: color 0.2s;
 
-    span {
-      cursor: pointer;
-      color: #de3b3b;
+    &:hover {
+      color: ${colors.primary};
     }
   }
 `;

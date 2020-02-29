@@ -13,7 +13,7 @@ import {
   OrderTable,
 } from './styles';
 
-export default function Recipient() {
+export default function RecipientList() {
   return (
     <Container>
       <h1>Gerenciando destinatários</h1>
@@ -23,7 +23,7 @@ export default function Recipient() {
           <MdSearch size={18} color="#999" />
           <input name="search" placeholder="Buscar por destinatários" />
         </SearchInput>
-        <Button as={Link} to="/orders/new">
+        <Button as={Link} to="/recipient/new">
           <MdAdd size={20} color="#FFF" />
           Cadastrar
         </Button>
