@@ -18,50 +18,102 @@ class OrderController {
     // paginação
     const { page = 1, nameProductLike } = req.query;
 
-    const order = await Order.findAll({
-      attributes: ['id', 'product', 'canceled_at', 'start_date', 'end_date'],
-      limit: 20,
-      offset: (page - 1) * 20,
-      include: [
-        {
-          model: Recipient,
-          as: 'recipient',
+    const order = nameProductLike
+      ? await Order.findAll({
           attributes: [
             'id',
-            'name',
-            'street',
-            'number',
-            'complement',
-            'city',
-            'state',
-            'cep',
+            'product',
+            'canceled_at',
+            'start_date',
+            'end_date',
           ],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['id', 'name', 'email', 'avatar_id'],
+          limit: 20,
+          offset: (page - 1) * 20,
           include: [
             {
-              model: File,
-              as: 'avatar',
+              model: Recipient,
+              as: 'recipient',
+              attributes: [
+                'id',
+                'name',
+                'street',
+                'number',
+                'complement',
+                'city',
+                'state',
+                'cep',
+              ],
+            },
+            {
+              model: Deliveryman,
+              as: 'deliveryman',
+              attributes: ['id', 'name', 'email', 'avatar_id'],
+              include: [
+                {
+                  model: File,
+                  as: 'avatar',
+                  attributes: ['id', 'path', 'url'],
+                },
+              ],
+            },
+            {
+              model: Signature,
+              as: 'signature',
               attributes: ['id', 'path', 'url'],
             },
           ],
-        },
-        {
-          model: Signature,
-          as: 'signature',
-          attributes: ['id', 'path', 'url'],
-        },
-      ],
-      where: {
-        product: {
-          [Op.iLike]: `%${nameProductLike}%`,
-        },
-      },
-      order: [['id', 'ASC']],
-    });
+          where: {
+            product: {
+              [Op.iLike]: `%${nameProductLike}%`,
+            },
+          },
+          order: [['id', 'ASC']],
+        })
+      : await Order.findAll({
+          attributes: [
+            'id',
+            'product',
+            'canceled_at',
+            'start_date',
+            'end_date',
+          ],
+          limit: 20,
+          offset: (page - 1) * 20,
+          include: [
+            {
+              model: Recipient,
+              as: 'recipient',
+              attributes: [
+                'id',
+                'name',
+                'street',
+                'number',
+                'complement',
+                'city',
+                'state',
+                'cep',
+              ],
+            },
+            {
+              model: Deliveryman,
+              as: 'deliveryman',
+              attributes: ['id', 'name', 'email', 'avatar_id'],
+              include: [
+                {
+                  model: File,
+                  as: 'avatar',
+                  attributes: ['id', 'path', 'url'],
+                },
+              ],
+            },
+            {
+              model: Signature,
+              as: 'signature',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+          order: [['id', 'ASC']],
+        });
 
     return res.json(order);
   }

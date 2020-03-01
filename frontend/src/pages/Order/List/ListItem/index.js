@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 import Action from '~/components/ActionPopUp';
-import OrderModal from '~/components/Modal';
+import OrderModal from '~/components/Modal/OrderModal';
 import Status from '~/components/Status';
 import api from '~/services/api';
 import history from '~/services/history';

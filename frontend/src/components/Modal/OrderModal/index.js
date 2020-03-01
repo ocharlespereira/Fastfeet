@@ -14,28 +14,32 @@ export default function OrderModal({ data }) {
           <small>
             {data.recipient.street}, {data.recipient.number}
           </small>
+          <small>
+            {data.recipient.city} - {data.recipient.state}
+          </small>
           <small>{data.recipient.cep}</small>
-          {data.start_dateFormated ? (
-					<div>
-						<strong>Datas</strong>
-						<div>
-							<span>Retirada: </span>
-							<small>{data.start_dateFormated}</small>
-						</div>
-						{data.end_dateFormated ? (
-							<div>
-								<span>Entrega: </span>
-								<small>{data.end_dateFormated}</small>
-							</div>
-						) : null}
         </div>
+        {data.start_dateFormated ? (
+          <div>
+            <strong>Datas</strong>
+            <div>
+              <span>Retirada: </span>
+              <small>{data.start_dateFormated}</small>
+            </div>
+            {data.end_dateFormated ? (
+              <div>
+                <span>Entrega: </span>
+                <small>{data.end_dateFormated}</small>
+              </div>
+            ) : null}
+          </div>
         ) : null}
-				{data.signature ? (
-					<div style={{ paddingBottom: '25px' }}>
-						<strong>Assinatura do destinatário</strong>
-						<img src={data.signature.url} alt="signature" />
-					</div>
-				) : null}
+        {data.signature ? (
+          <div style={{ paddingBottom: '25px' }}>
+            <strong>Assinatura do destinatário</strong>
+            <img src={data.signature.url} alt="signature" />
+          </div>
+        ) : null}
       </Container>
     </Modal>
   );
