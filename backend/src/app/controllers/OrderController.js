@@ -177,16 +177,16 @@ class OrderController {
       }
     }
 
-    // const { id, product } = await Order.create(req.body);
+    const { product } = req.body;
 
     const {
       id,
-      product,
       signature_id,
       start_date,
       end_date,
       canceled_at,
     } = await Order.create({
+      product,
       recipient_id,
       deliveryman_id,
       status: 'PENDENTE',
@@ -231,7 +231,6 @@ class OrderController {
 
     return res.json({
       id,
-      status: 'PENDENTE',
       product,
       recipient_id,
       deliveryman_id,
