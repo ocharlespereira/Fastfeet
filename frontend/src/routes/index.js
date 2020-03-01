@@ -8,7 +8,7 @@ import DeliverymanList from '~/pages/Deliveryman/List';
 import OrderForm from '~/pages/Order/Form';
 import OrderList from '~/pages/Order/List';
 import Problem from '~/pages/Problem';
-// import RecipientForm from '~/pages/Recipient/Form';
+import RecipientForm from '~/pages/Recipient/Form';
 import RecipientList from '~/pages/Recipient/List';
 import SignIn from '~/pages/SignIn';
 import Route from '~/routes/Route';
@@ -22,16 +22,13 @@ export default function Routes() {
       <Route path="/orders" component={OrderList} isPrivate />
       <Route path="/order/new" component={OrderForm} exact isPrivate />
       <Route path="/order/:id/edit" component={OrderForm} exact isPrivate />
-      {/* <Route path="/orders/new" component={OrderForm} isPrivate exact />
-      <Route path="/orders/:id/edit" component={OrderForm} isPrivate /> */}
+
+      <Route path="/recipients" component={RecipientList} isPrivate />
+      <Route path="/recipient/new" component={RecipientForm} exact isPrivate />
+      <Route path="/recipient/:id/edit" component={RecipientForm} isPrivate />
 
       <Route path="/deliverymans" component={DeliverymanList} isPrivate />
-      <Route
-        path="/deliveryman/new"
-        component={DeliverymanForm}
-        exact
-        isPrivate
-      />
+      <Route path="/deliveryman/new" component={DeliverymanForm} isPrivate />
       <Route
         path="/deliveryman/:id/edit"
         component={DeliverymanForm}

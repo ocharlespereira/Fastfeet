@@ -1,56 +1,77 @@
-import React from 'react';
-import { MdAdd, MdSearch } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { MdAdd } from 'react-icons/md';
 
-import ActionRecipient from '~/components/Actions/Recipient';
+import { IconButton } from '~/components/Button';
+import { InputSearch } from '~/components/Form';
+import HeaderList from '~/components/HeaderList';
+import api from '~/services/api';
+import history from '~/services/history';
 
-import {
-  Container,
-  OrderControls,
-  Button,
-  SearchInput,
-  Content,
-  OrderTable,
-} from './styles';
+import RecipientItem from './ListItem';
+import { Container, Content, Grid } from './styles';
 
 export default function RecipientList() {
+  const [page, setPage] = useState(1);
+  const [recipients, setRecipients] = useState([]);
+
+  async function loadRecipients() {
+    const response = await api.get('/recipients', {
+      params: {
+        page,
+      },
+    });
+
+    setRecipients(response.data);
+  }
+
+  useEffect(() => {
+    loadRecipients();
+  }, [page]); // eslint-disable-line
+
+  async function handleSearchRecipient(e) {
+    setPage(1);
+
+    const response = await api.get('/recipients', {
+      params: {
+        nameLike: e.target.value,
+        page,
+      },
+    });
+
+    setRecipients(response.data);
+  }
+
   return (
     <Container>
-      <h1>Gerenciando destinatários</h1>
-
-      <OrderControls>
-        <SearchInput>
-          <MdSearch size={18} color="#999" />
-          <input name="search" placeholder="Buscar por destinatários" />
-        </SearchInput>
-        <Button as={Link} to="/recipient/new">
-          <MdAdd size={20} color="#FFF" />
-          Cadastrar
-        </Button>
-      </OrderControls>
-
       <Content>
-        <OrderTable>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Endereço</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>#01</td>
-              <td>Janaína de Souza</td>
-              <td>Rua Beethoven, 1729, Diadeba - São Paulo, SP</td>
-              <td>
-                <ActionRecipient />
-              </td>
-            </tr>
-          </tbody>
-        </OrderTable>
+        <HeaderList title="Gerenciando destinatários">
+          <InputSearch
+            type="text"
+            placeholder="Buscar por destinatários"
+            onChange={handleSearchRecipient}
+          />
+          <IconButton
+            Icon={MdAdd}
+            title="CADASTRAR"
+            action={() => history.push('/recipients/new')}
+            type="button"
+          />
+        </HeaderList>
+        <Grid>
+          <section>
+            <strong>ID</strong>
+            <strong>Nome</strong>
+            <strong>Endereço</strong>
+            <strong>Ações</strong>
+          </section>
+          {recipients.map(recipient => (
+            <RecipientItem
+              updateRecipients={loadRecipients}
+              key={recipient.id}
+              data={recipient}
+            />
+          ))}
+        </Grid>
       </Content>
     </Container>
   );
