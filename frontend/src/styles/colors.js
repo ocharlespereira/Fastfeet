@@ -18,19 +18,19 @@ export const colors = {
 };
 
 export const statusColors = {
-  pendente: {
+  PENDENTE: {
     color: '#C1BC35',
     bg: '#F0F0DF',
   },
-  retirada: {
+  RETIRADA: {
     color: '#4D85EE',
     bg: '#BAD2FF',
   },
-  entregue: {
+  ENTREGUE: {
     color: '#2CA42B',
     bg: '#DFF0DF',
   },
-  cancelada: {
+  CANCELADA: {
     color: '#DE3B3B',
     bg: '#FAB0B0',
   },

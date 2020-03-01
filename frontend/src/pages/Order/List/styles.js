@@ -21,7 +21,8 @@ export const Grid = styled.div`
   height: 400px;
   > section {
     display: grid;
-    grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1.5fr 1fr 1fr;
+    /* grid-template-columns: 0.5fr 1.5fr 1fr 1.5fr 1.5fr 1fr 1fr; */
+    grid-template-columns: 0.5fr 1.5fr 2fr 1.5fr 1.5fr 1fr 1fr;
     margin-bottom: 15px;
     padding-left: 25px;
     padding-right: 13px;
