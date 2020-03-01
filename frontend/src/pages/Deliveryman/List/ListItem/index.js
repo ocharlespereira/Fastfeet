@@ -36,10 +36,11 @@ export default function DeliverymanItem({ data, updateDeliveryman }) {
     <Container>
       <small>#{data.id}</small>
       {/* Verificar este erro de autenticação aqui */}
-      {data.avatar ? (<img src={data?.avatar?.id} alt="AvatarUrl" />
+      {data.avatar ? (
+        <img src={data.avatar.url} alt="AvatarUrl" />
       ) : (
         <PhotoName name={data.name} />
-      )}   
+      )}
 
       <small>{data.name}</small>
       <small>{data.email}</small>

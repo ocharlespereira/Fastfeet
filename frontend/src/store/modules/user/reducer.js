@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   profile: null,
 };
 
-export default function auth(state = INITIAL_STATE, action) {
+export default function user(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case '@auth/SIGN_IN_REQUEST': {
@@ -17,7 +17,6 @@ export default function auth(state = INITIAL_STATE, action) {
       }
 
       default:
-        return state;
     }
   });
 }

@@ -19,7 +19,7 @@ export default function DeliverymanForm({match}) {
   useEffect(() => {
     async function loadInitialData(deliverymanId) {
       if (id) {
-        const res = await api.get(`/deliveryman/${deliverymanId}`);
+        const res = await api.get(`/deliverymans/${deliverymanId}`);
 
         formRef.current.setData(res.data);
         formRef.current.setFieldValue('avatar', res?.data?.avatar?.url);
@@ -48,8 +48,9 @@ export default function DeliverymanForm({match}) {
 
       const resFile = data.avatar ? await api.post('files', dataFile) : null;
 
+      //edita cadastro de entregador
       if (id) {
-        await api.put(`/deliveryman/${id}`, {
+        await api.put(`/deliverymans/${id}`, {
           name: data.name,
           email: data.email,
           avatar_id: resFile?.data?.id,
@@ -98,6 +99,8 @@ export default function DeliverymanForm({match}) {
             name="email"
             type="email"
             placeholder="Digite o email"
+            onKeyPress={e =>
+							e.key === 'Enter' ? formRef.current.submitForm() : null} //precionar enter salva
           />
         </UnForm>
       </Content>

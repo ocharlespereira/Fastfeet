@@ -5,13 +5,11 @@ import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
 
 class DeliverymanController {
-  async index(req, res) {
-    const { page = 1, nameLike } = req.query;
+  async show(req, res) {
+    const { id } = req.params;
 
-    const delivery = nameLike ? await Deliveryman.findAll({
-      attributes: ['id', 'name', 'email', 'avatar_id'],
-      limit: 20,
-      offset: (page - 1) * 20,
+    const deliveryman = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
       include: [
         {
           model: File,
@@ -19,37 +17,61 @@ class DeliverymanController {
           attributes: ['id', 'path', 'url'],
         },
       ],
-	  where: {
-        name: {
-          [Op.iLike]: `%${nameLike}%`,
-        },
-      },
-      order: [['id', 'ASC']],
-    }) :
-        await Deliveryman.findAll({
-            attributes: ['id', 'name', 'email', 'avatar_id'],
-            limit: 20,
-            offset: (page - 1) * 20,
-            include: [
-              {
-                model: File,
-                as: 'avatar',
-                attributes: ['id', 'path', 'url'],
-              },
-            ],
-            order: [['id', 'ASC']],
-          });
+    });
 
-          return res.json(delivery);
-        }
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'Delivery man does not exists' });
+    }
 
-        async store(req, res) {
-          const schema = Yup.object().shape({
-            name: Yup.string().required(),
-            email: Yup.string()
-              .email()
-              .required(),
-          });
+    return res.json(deliveryman);
+  }
+
+  async index(req, res) {
+    const { page = 1, nameLike } = req.query;
+
+    const delivery = nameLike
+      ? await Deliveryman.findAll({
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+          limit: 20,
+          offset: (page - 1) * 20,
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+          where: {
+            name: {
+              [Op.iLike]: `%${nameLike}%`,
+            },
+          },
+          order: [['id', 'ASC']],
+        })
+      : await Deliveryman.findAll({
+          attributes: ['id', 'name', 'email', 'avatar_id'],
+          limit: 20,
+          offset: (page - 1) * 20,
+          include: [
+            {
+              model: File,
+              as: 'avatar',
+              attributes: ['id', 'path', 'url'],
+            },
+          ],
+          order: [['id', 'ASC']],
+        });
+
+    return res.json(delivery);
+  }
+
+  async store(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+      email: Yup.string()
+        .email()
+        .required(),
+    });
 
     if (!(await schema.isValid(req.body))) {
       return res.status(400).json({ error: 'Validation fails.' });

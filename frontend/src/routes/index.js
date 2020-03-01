@@ -3,8 +3,7 @@ import { Switch } from 'react-router-dom';
 
 // import Dashboard from '~/pages/Dashboard';
 // import DeliverymanForm from '~/pages/Deliveryman/Form';
-import DeliverymanForm from '~/pages/Deliveryman/Form/Cad';
-import DeliverymanFormEdit from '~/pages/Deliveryman/Form/Edit';
+import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanList from '~/pages/Deliveryman/List';
 import Order from '~/pages/Order';
 import Problem from '~/pages/Problem';
@@ -25,7 +24,7 @@ export default function Routes() {
       <Route path="/deliveryman/new" component={DeliverymanForm} isPrivate />
       <Route
         path="/deliveryman/:id/edit"
-        component={DeliverymanFormEdit}
+        component={DeliverymanForm}
         isPrivate
       />
 
