@@ -1,11 +1,10 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
-// import Dashboard from '~/pages/Dashboard';
-// import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanList from '~/pages/Deliveryman/List';
-import Order from '~/pages/Order';
+// import OrderForm from '~/pages/Order/Form';
+import OrderList from '~/pages/Order/List';
 import Problem from '~/pages/Problem';
 // import RecipientForm from '~/pages/Recipient/Form';
 import RecipientList from '~/pages/Recipient/List';
@@ -18,7 +17,9 @@ export default function Routes() {
       <Route path="/" component={SignIn} exact />
       {/* <Route path="/dashboard" component={Dashboard} isPrivate /> */}
 
-      <Route path="/orders" component={Order} isPrivate exact />
+      <Route path="/orders" component={OrderList} isPrivate />
+      {/* <Route path="/orders/new" component={OrderForm} isPrivate exact />
+      <Route path="/orders/:id/edit" component={OrderForm} isPrivate /> */}
 
       <Route path="/deliverymans" component={DeliverymanList} isPrivate />
       <Route path="/deliveryman/new" component={DeliverymanForm} isPrivate />
@@ -29,7 +30,6 @@ export default function Routes() {
       />
 
       <Route path="/recipients" component={RecipientList} isPrivate />
-      {/* <Route path="/recipient/new" component={RecipientForm} isPrivate /> */}
 
       <Route path="/problems" component={Problem} isPrivate />
     </Switch>
