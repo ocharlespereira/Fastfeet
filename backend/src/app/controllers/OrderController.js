@@ -124,22 +124,27 @@ class OrderController {
   async show(req, res) {
     const { id } = req.params;
 
-    const deliveryman = await Deliveryman.findByPk(id, {
-      attributes: ['id', 'name', 'email'],
+    const order = await Order.findByPk(id, {
+      attributes: ['id', 'product', 'recipient_id', 'deliveryman_id'],
       include: [
         {
-          model: File,
-          as: 'avatar',
-          attributes: ['id', 'path', 'url'],
+          model: Recipient,
+          as: 'recipient',
+          attributes: ['id', 'name'],
+        },
+        {
+          model: Deliveryman,
+          as: 'deliveryman',
+          attributes: ['id', 'name'],
         },
       ],
     });
 
-    if (!deliveryman) {
-      return res.status(400).json({ error: 'Delivery man does not exists' });
+    if (!order) {
+      return res.status(400).json({ error: 'Order does not exists' });
     }
 
-    return res.json(deliveryman);
+    return res.json(order);
   }
 
   async store(req, res) {

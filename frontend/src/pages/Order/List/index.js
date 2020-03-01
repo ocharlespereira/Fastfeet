@@ -73,7 +73,7 @@ export default function OrderList() {
           <IconButton
             Icon={MdAdd}
             title="CADASTRAR"
-            action={() => history.push('/orders/new')}
+            action={() => history.push('/order/new')}
             type="button"
           />
         </HeaderList>

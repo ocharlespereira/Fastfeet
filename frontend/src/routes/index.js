@@ -1,9 +1,11 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
 import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanList from '~/pages/Deliveryman/List';
-// import OrderForm from '~/pages/Order/Form';
+import OrderForm from '~/pages/Order/Form';
 import OrderList from '~/pages/Order/List';
 import Problem from '~/pages/Problem';
 // import RecipientForm from '~/pages/Recipient/Form';
@@ -18,11 +20,18 @@ export default function Routes() {
       {/* <Route path="/dashboard" component={Dashboard} isPrivate /> */}
 
       <Route path="/orders" component={OrderList} isPrivate />
+      <Route path="/order/new" component={OrderForm} exact isPrivate />
+      <Route path="/order/:id/edit" component={OrderForm} exact isPrivate />
       {/* <Route path="/orders/new" component={OrderForm} isPrivate exact />
       <Route path="/orders/:id/edit" component={OrderForm} isPrivate /> */}
 
       <Route path="/deliverymans" component={DeliverymanList} isPrivate />
-      <Route path="/deliveryman/new" component={DeliverymanForm} isPrivate />
+      <Route
+        path="/deliveryman/new"
+        component={DeliverymanForm}
+        exact
+        isPrivate
+      />
       <Route
         path="/deliveryman/:id/edit"
         component={DeliverymanForm}

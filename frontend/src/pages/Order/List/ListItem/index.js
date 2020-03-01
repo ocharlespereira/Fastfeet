@@ -67,7 +67,7 @@ export default function OrderItem({ data, updateOrders }) {
           <div>
             <button
               type="button"
-              onClick={() => history.push(`/orders/${data.id}/edit`)}
+              onClick={() => history.push(`/order/${data.id}/edit`)}
             >
               <MdEdit color={colors.info} size={15} />
               <span>Editar</span>
