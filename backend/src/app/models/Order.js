@@ -12,6 +12,7 @@ class Order extends Model {
         start_date: Sequelize.DATE,
         end_date: Sequelize.DATE,
         created_at: Sequelize.DATE,
+        status: Sequelize.STRING,
       },
       {
         sequelize,
