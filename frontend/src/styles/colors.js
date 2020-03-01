@@ -4,6 +4,7 @@ export const colors = {
   primary: '#7D40E7',
   danger: '#DE3B3B',
   info: '#4D85EE',
+  modal: '#8E5BE8',
 
   title: '#444444',
   label: '#666666',
