@@ -28,8 +28,8 @@ class DeliveryOrdersController {
     }
 
     const orders = await Order.findAll({
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 10,
+      offset: (page - 1) * 10,
       where: {
         deliveryman_id: id,
         start_date: null,
@@ -97,7 +97,6 @@ class DeliveryOrdersController {
     const {
       deliveryman_id,
       recipient_id,
-      // end_date,
       signature_id,
       canceled_at,
     } = await orderExist.update(req.body);
@@ -106,7 +105,6 @@ class DeliveryOrdersController {
       deliveryman_id,
       recipient_id,
       start_date,
-      // end_date,
       signature_id,
       canceled_at,
     });

@@ -23,16 +23,18 @@ class OrderController {
           attributes: [
             'id',
             'product',
+            'status',
             'canceled_at',
             'start_date',
             'end_date',
           ],
-          limit: 20,
-          offset: (page - 1) * 20,
+          limit: 10,
+          offset: (page - 1) * 10,
           include: [
             {
               model: Recipient,
               as: 'recipient',
+              paranoid: false,
               attributes: [
                 'id',
                 'name',
@@ -41,7 +43,7 @@ class OrderController {
                 'complement',
                 'city',
                 'state',
-                'cep',
+                'zip_code',
               ],
             },
             {
@@ -73,12 +75,13 @@ class OrderController {
           attributes: [
             'id',
             'product',
+            'status',
             'canceled_at',
             'start_date',
             'end_date',
           ],
-          limit: 20,
-          offset: (page - 1) * 20,
+          limit: 10,
+          offset: (page - 1) * 10,
           include: [
             {
               model: Recipient,
@@ -91,7 +94,7 @@ class OrderController {
                 'complement',
                 'city',
                 'state',
-                'cep',
+                'zip_code',
               ],
             },
             {
@@ -118,6 +121,27 @@ class OrderController {
     return res.json(order);
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'Delivery man does not exists' });
+    }
+
+    return res.json(deliveryman);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       recipient_id: Yup.string().required(),
@@ -138,22 +162,35 @@ class OrderController {
       recipient = await Recipient.findByPk(recipient_id);
 
       if (!recipient) {
-        return res.status(400).json({ error: 'Recipient not exists.' });
+        return res.status(400).json({ error: 'Recipient does not exists.' });
       }
     }
 
     // Verifica se o deliverymanId está cadastrado na tabela deliveryman
-    let deliveryman = null;
+    let deliverymanExists = null;
 
     if (deliveryman_id) {
-      deliveryman = await Deliveryman.findByPk(deliveryman_id);
+      deliverymanExists = await Deliveryman.findByPk(deliveryman_id);
 
-      if (!deliveryman) {
+      if (!deliverymanExists) {
         return res.status(400).json({ error: 'Deliveryman not exists.' });
       }
     }
 
-    const { id, product } = await Order.create(req.body);
+    // const { id, product } = await Order.create(req.body);
+
+    const {
+      id,
+      product,
+      signature_id,
+      start_date,
+      end_date,
+      canceled_at,
+    } = await Order.create({
+      recipient_id,
+      deliveryman_id,
+      status: 'PENDENTE',
+    });
 
     /**
      * Notificar deliveryman
@@ -174,7 +211,7 @@ class OrderController {
      * Envio de email
      */
     const addressRecipient = `${recipient.street}, ${recipient.number}, 
-                              ${recipient.cep}, ${recipient.complement}, 
+                              ${recipient.zip_code}, ${recipient.complement}, 
                               ${recipient.city}-${recipient.state}`;
 
     // chamada queue de filas
@@ -189,13 +226,19 @@ class OrderController {
     await Notification.create({
       content: `Novo agendamento para o ${delivery.name} no ${formattedDate}`,
       deliveryman: deliveryman_id,
+      status: 'PENDENTE',
     });
 
     return res.json({
       id,
+      status: 'PENDENTE',
+      product,
       recipient_id,
       deliveryman_id,
-      product,
+      signature_id,
+      start_date,
+      end_date,
+      canceled_at,
     });
   }
 

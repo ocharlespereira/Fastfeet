@@ -16,10 +16,10 @@ class RecipientController {
         'complement',
         'city',
         'state',
-        'cep',
+        'zip_code',
       ],
-      limit: 20,
-      offset: (page - 1) * 20,
+      limit: 10,
+      offset: (page - 1) * 10,
       where: {
         name: {
           [Op.iLike]: `%${nameLike}%`,
@@ -39,7 +39,7 @@ class RecipientController {
       complement: Yup.string(),
       city: Yup.string().required(),
       state: Yup.string().required(),
-      cep: Yup.number().required(),
+      zip_code: Yup.string().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -64,7 +64,7 @@ class RecipientController {
       complement,
       city,
       state,
-      cep,
+      zip_code,
     } = await Recipient.create(req.body);
 
     return res.json({
@@ -75,7 +75,7 @@ class RecipientController {
       complement,
       city,
       state,
-      cep,
+      zip_code,
     });
   }
 
@@ -87,7 +87,7 @@ class RecipientController {
       complement: Yup.string(),
       city: Yup.string(),
       state: Yup.string(),
-      cep: Yup.number(),
+      zip_code: Yup.number(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -105,7 +105,7 @@ class RecipientController {
       complement,
       city,
       state,
-      cep,
+      zip_code,
     } = await recipientId.update(req.body);
 
     return res.json({
@@ -116,7 +116,7 @@ class RecipientController {
       complement,
       city,
       state,
-      cep,
+      zip_code,
     });
   }
 
@@ -140,7 +140,7 @@ class RecipientController {
         'complement',
         'city',
         'state',
-        'cep',
+        'zip_code',
       ],
     });
 
