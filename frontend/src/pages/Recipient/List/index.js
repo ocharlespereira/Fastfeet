@@ -53,7 +53,7 @@ export default function RecipientList() {
           <IconButton
             Icon={MdAdd}
             title="CADASTRAR"
-            action={() => history.push('/recipients/new')}
+            action={() => history.push('/recipient/new')}
             type="button"
           />
         </HeaderList>
