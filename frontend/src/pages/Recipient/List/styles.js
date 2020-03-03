@@ -3,19 +3,18 @@ import styled from 'styled-components';
 import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
-  display: flex;
   justify-content: center;
   padding: 0 20px;
+  display: flex;
 `;
 
 export const Content = styled.div`
   width: 100%;
   max-width: 1200px;
-  margin-bottom: 15px;
 
   > section {
-    display: flex;
     justify-content: space-between;
+    display: flex;
     margin-top: 15px;
   }
 `;
@@ -27,6 +26,8 @@ export const Grid = styled.div`
     grid-template-columns: 0.5fr 1.5fr 2fr 0.5fr;
     padding-left: 25px;
     padding-right: 13px;
+    padding-right: 13px;
+    margin-bottom: 15px;
 
     strong:last-child {
       text-align: right;

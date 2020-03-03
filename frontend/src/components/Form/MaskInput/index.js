@@ -32,5 +32,6 @@ export default function MaskInput({ name, label, ...rest }) {
   );
 }
 MaskInput.propTypes = {
+  name: PropTypes.string.isRequired,
   zip_code: PropTypes.string.isRequired,
 };
