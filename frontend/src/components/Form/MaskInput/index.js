@@ -7,7 +7,7 @@ import { InputMask, Label, Error } from './styles';
 
 export default function MaskInput({ name, label, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
     registerField({
@@ -31,7 +31,12 @@ export default function MaskInput({ name, label, ...rest }) {
     </Label>
   );
 }
+
 MaskInput.propTypes = {
   name: PropTypes.string.isRequired,
-  zip_code: PropTypes.string.isRequired,
+  label: PropTypes.string,
+};
+
+MaskInput.defaultProps = {
+  label: '',
 };
