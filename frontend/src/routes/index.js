@@ -7,7 +7,8 @@ import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanList from '~/pages/Deliveryman/List';
 import OrderForm from '~/pages/Order/Form';
 import OrderList from '~/pages/Order/List';
-import Problem from '~/pages/Problem';
+import ProblemForm from '~/pages/Problem/Form';
+import ProblemList from '~/pages/Problem/List';
 import RecipientForm from '~/pages/Recipient/Form';
 import RecipientList from '~/pages/Recipient/List';
 import SignIn from '~/pages/SignIn';
@@ -35,9 +36,9 @@ export default function Routes() {
         isPrivate
       />
 
-      <Route path="/recipients" component={RecipientList} isPrivate />
+      <Route path="/problems" component={ProblemList} isPrivate />
 
-      <Route path="/problems" component={Problem} isPrivate />
+      {/* <Route path="/problems" component={Problem} isPrivate /> */}
     </Switch>
   );
 }
