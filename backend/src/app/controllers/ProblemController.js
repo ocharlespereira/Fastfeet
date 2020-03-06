@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import * as Yup from 'yup';
 
 import Order from '../models/Order';
 import Problem from '../models/Problem';
@@ -50,10 +51,18 @@ class ProblemController {
   }
 
   async store(req, res) {
-    const { idOrder } = req.params;
+    const schema = Yup.object().shape({
+      description: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'validation fails' });
+    }
+
     /**
      * Verifica se existe Ordem de entrega cadastrado
      */
+    const { idOrder } = req.params;
     const order = await Order.findOne({ where: { id: idOrder } });
 
     if (!order) {
