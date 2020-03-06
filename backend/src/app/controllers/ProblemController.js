@@ -14,6 +14,17 @@ import Queue from '../../lib/Queue';
 
 class ProblemController {
   async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const problem = await Problem.findAll({
+      limit: 10,
+      offset: (page - 1) * 10,
+    });
+
+    return res.json(problem);
+  }
+
+  async show(req, res) {
     // paginação
     // const { page = 1 } = req.query;
 
@@ -138,10 +149,13 @@ class ProblemController {
     /**
      * Salva data de cancelamento
      */
-    if (orderCancel) {
-      orderCancel.canceled_at = new Date();
-      await orderCancel.save();
-    }
+    // if (orderCancel) {
+    //   orderCancel.canceled_at = new Date();
+    //   orderCancel.status = 'CANCELADA';
+    //   await orderCancel.save();
+    // }
+
+    await orderCancel.update({ canceled_at: new Date(), status: 'CANCELADA' });
 
     /**
      * Notificar deliveryman

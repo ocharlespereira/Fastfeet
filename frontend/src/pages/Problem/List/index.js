@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import HeaderList from '~/components/HeaderList';
 import api from '~/services/api';
 
-import ProblemItem from './ProblemItem';
+// import ProblemItem from './ProblemItem';
 import { Container, Content, Grid } from './styles';
 
 export default function ProblemList() {
@@ -35,13 +35,13 @@ export default function ProblemList() {
             <strong>Problema</strong>
             <strong>Ações</strong>
           </section>
-          {problems.map(problem => {
+          {/* {problems.map(problem => {
             <ProblemItem
               key={problem.id}
               data={problem}
               updateProblems={loadProblems}
             />;
-          })}
+          })} */}
         </Grid>
       </Content>
     </Container>
