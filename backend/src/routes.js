@@ -38,7 +38,7 @@ routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
  */
 
 routes.get('/delivery/problems', ProblemController.index);
-routes.get('/delivery/:idOrder/problems', ProblemController.show);
+routes.get('/delivery/:id/problems', ProblemController.show);
 routes.post('/delivery/:idOrder/problems', ProblemController.store);
 
 /**

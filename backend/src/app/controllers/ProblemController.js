@@ -25,14 +25,11 @@ class ProblemController {
   }
 
   async show(req, res) {
-    // paginação
-    // const { page = 1 } = req.query;
-
-    const { idOrder } = req.params;
+    const { id } = req.params;
     /**
      * Verifica se existe Ordem de entrega cadastrado
      */
-    const order = await Order.findOne({ where: { id: idOrder } });
+    const order = await Order.findByPk(id);
 
     if (!order) {
       return res.status(400).json({ error: 'Order already not exists.' });
@@ -41,20 +38,13 @@ class ProblemController {
     /**
      * Verifica se existe a notificação cadastrado
      */
-    const problemExist = await Problem.findOne({
-      where: { delivery_id: idOrder },
+    const problem = await Problem.findOne({
+      where: { delivery_id: id },
     });
 
-    if (!problemExist) {
+    if (!problem) {
       return res.status(400).json({ error: 'Problem already not exists.' });
     }
-
-    const problem = await Problem.findOne({
-      attributes: ['delivery_id', 'description'],
-      where: {
-        delivery_id: idOrder,
-      },
-    });
 
     return res.json(problem);
   }
