@@ -7,7 +7,6 @@ import DeliverymanForm from '~/pages/Deliveryman/Form';
 import DeliverymanList from '~/pages/Deliveryman/List';
 import OrderForm from '~/pages/Order/Form';
 import OrderList from '~/pages/Order/List';
-import ProblemForm from '~/pages/Problem/Form';
 import ProblemList from '~/pages/Problem/List';
 import RecipientForm from '~/pages/Recipient/Form';
 import RecipientList from '~/pages/Recipient/List';
