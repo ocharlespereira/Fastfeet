@@ -11,7 +11,7 @@ export default function ProblemList() {
   const [problems, setProblems] = useState([]);
 
   async function loadProblems() {
-    const res = await api.get('/problems', {
+    const res = await api.get('/delivery/problems', {
       params: {
         page,
       },
@@ -35,13 +35,13 @@ export default function ProblemList() {
             <strong>Problema</strong>
             <strong>Ações</strong>
           </section>
-          {problems.map(problem => {
+          {problems.map(problem => (
             <ProblemItem
-              key={problem.id}
+              key={problem._id}
               data={problem}
               updateProblems={loadProblems}
-            />;
-          })}
+            />
+          ))}
         </Grid>
       </Content>
     </Container>

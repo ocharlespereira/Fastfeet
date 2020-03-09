@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 
 import ActionPopUp from '~/components/ActionPopUp';
-import Modal from '~/components/Modal';
+import Modal from '~/components/Modal/Modal';
 import api from '~/services/api';
 import { colors } from '~/styles/colors';
 
@@ -23,7 +23,7 @@ export default function ProblemItem({ data, updateProblems }) {
     }
 
     try {
-      await api.delete(`/problem/${data.id}/cancel-order`);
+      await api.delete(`/problem/${data._id}/cancel-delivery`);
       updateProblems();
       toast.success('Encomenda cancelada com sucesso.');
     } catch (err) {
@@ -33,8 +33,8 @@ export default function ProblemItem({ data, updateProblems }) {
 
   return (
     <Container>
-      <small>#01</small>
-      <small>problema na carga</small>
+      <small>{data._id}</small>
+      <small>{data.description}</small>
       <ActionPopUp contentStyle={{ width: '200px', borderRadius: '4px' }} />
 
       <ActionContainer>
@@ -42,13 +42,13 @@ export default function ProblemItem({ data, updateProblems }) {
           <Modal>
             <ModalContainer>
               <strong>VISUALIZAR PROBLEMA</strong>
-              <p>problema teste</p>
+              <p>{data.description}</p>
             </ModalContainer>
           </Modal>
         </div>
 
         <div>
-          <button onClick="" type="button">
+          <button onClick={handleCancel} type="button">
             <MdDeleteForever color={colors.danger} size={15} />
             <span>Cancelar encomenda</span>
           </button>

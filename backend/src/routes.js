@@ -36,8 +36,6 @@ routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
 /**
  * Problemas nas Entregas
  */
-
-routes.get('/delivery/problems', ProblemController.index);
 routes.get('/delivery/:id/problems', ProblemController.show);
 routes.post('/delivery/:idOrder/problems', ProblemController.store);
 
@@ -72,6 +70,7 @@ routes.delete('/orders/:id', OrderController.delete);
 /**
  * Cancelamento de entrega com problema.
  */
+routes.get('/delivery/problems', ProblemController.index);
 routes.delete('/problem/:idOrder/cancel-delivery', ProblemController.delete);
 
 export default routes;

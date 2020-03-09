@@ -173,7 +173,7 @@ class ProblemController {
     await Notification.create({
       content:
         `Prezado ${delivery.name} o cancelamento correspondente a entrega ` +
-        `${orderCancel.id} encontra-se com status cancelado no ${formattedDate}`,
+        `${orderCancel.delivery_id} encontra-se com status cancelado no ${formattedDate}`,
       deliveryman: orderCancel.deliveryman_id,
     });
 
