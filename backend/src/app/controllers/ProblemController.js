@@ -144,15 +144,6 @@ class ProblemController {
       },
     });
 
-    /**
-     * Salva data de cancelamento
-     */
-    // if (orderCancel) {
-    //   orderCancel.canceled_at = new Date();
-    //   orderCancel.status = 'CANCELADA';
-    //   await orderCancel.save();
-    // }
-
     await orderCancel.update({ canceled_at: new Date(), status: 'CANCELADA' });
 
     /**
