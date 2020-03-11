@@ -66,7 +66,7 @@ class ProblemController {
     const order = await Order.findByPk(id);
 
     if (!order) {
-      return res.status(400).json({ error: 'Order already not exists.' });
+      return res.status(400).json({ error: 'Delivery does not exist.' });
     }
 
     /**
@@ -77,13 +77,12 @@ class ProblemController {
     });
 
     if (problemExist) {
-      return res.status(400).json({ error: 'problem already reported!' });
+      return res.status(400).json({ error: 'Problem already reported!' });
     }
 
     const { description } = req.body;
 
     const problem = await Problem.create({
-      id,
       delivery_id: id,
       description,
     });
@@ -92,31 +91,31 @@ class ProblemController {
   }
 
   async delete(req, res) {
-    const { idOrder } = req.params;
     /**
      * Verifica se existe Ordem de entrega cadastrado
      */
-    const order = await Order.findOne({ where: { id: idOrder } });
+    const { id } = req.params;
+    const order = await Order.findByPk(id);
 
     if (!order) {
-      return res.status(400).json({ error: 'Order already not exists.' });
+      return res.status(400).json({ error: 'Delivery does not exist.' });
     }
 
     /**
      * Verifica se existe a notificação cadastrado
      */
     const problemExist = await Problem.findOne({
-      where: { delivery_id: idOrder },
+      where: { delivery_id: id },
     });
 
     if (!problemExist) {
-      return res.status(400).json({ error: 'Problem already not exists.' });
+      return res.status(400).json({ error: 'Problem does not exists!' });
     }
 
     /**
      * Cancela a entrega e atualiza o campo canceled_at para a data atual
      */
-    const orderCancel = await Order.findByPk(idOrder, {
+    const orderCancel = await Order.findByPk(id, {
       include: [
         {
           model: Signature,
@@ -134,12 +133,12 @@ class ProblemController {
             'complement',
             'city',
             'state',
-            'cep',
+            'zip_code',
           ],
         },
       ],
       where: {
-        id: idOrder,
+        // id: id,
         canceled_at: null,
         start_date: { [Op.ne]: null },
       },
@@ -161,7 +160,6 @@ class ProblemController {
      */
     const delivery = await Deliveryman.findByPk(orderCancel.deliveryman_id);
 
-    // const parseDate = subHours(parseISO(orderDate.created_at), 3);
     const parseDate = orderCancel.canceled_at;
 
     const formattedDate = format(
@@ -182,7 +180,7 @@ class ProblemController {
      */
     const addressRecipient = `${orderCancel.recipient.street},
                               ${orderCancel.recipient.number},
-                              ${orderCancel.recipient.cep},
+                              ${orderCancel.recipient.zip_code},
                               ${orderCancel.recipient.complement},
                               ${orderCancel.recipient.city}-
                               ${orderCancel.recipient.state}`;
