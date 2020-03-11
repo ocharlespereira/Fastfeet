@@ -37,7 +37,7 @@ routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
  * Problemas nas Entregas
  */
 routes.get('/delivery/:id/problems', ProblemController.show);
-routes.post('/delivery/:idOrder/problems', ProblemController.store);
+routes.post('/delivery/:id/problems', ProblemController.store);
 
 /**
  * Acesso a Usuários autenticados (Admins)

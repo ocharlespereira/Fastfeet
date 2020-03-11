@@ -62,8 +62,8 @@ class ProblemController {
     /**
      * Verifica se existe Ordem de entrega cadastrado
      */
-    const { idOrder } = req.params;
-    const order = await Order.findOne({ where: { id: idOrder } });
+    const { id } = req.params;
+    const order = await Order.findByPk(id);
 
     if (!order) {
       return res.status(400).json({ error: 'Order already not exists.' });
@@ -73,18 +73,18 @@ class ProblemController {
      * Verifica se existe a notificação cadastrado
      */
     const problemExist = await Problem.findOne({
-      where: { delivery_id: idOrder },
+      where: { delivery_id: id },
     });
 
-    if (!problemExist) {
-      return res.status(400).json({ error: 'Problem already not exists.' });
+    if (problemExist) {
+      return res.status(400).json({ error: 'problem already reported!' });
     }
 
-    const { id, description } = req.body;
+    const { description } = req.body;
 
     const problem = await Problem.create({
       id,
-      delivery_id: idOrder,
+      delivery_id: id,
       description,
     });
 
@@ -180,10 +180,10 @@ class ProblemController {
     /**
      * Envio de email
      */
-    const addressRecipient = `${orderCancel.recipient.street}, 
-                              ${orderCancel.recipient.number}, 
-                              ${orderCancel.recipient.cep}, 
-                              ${orderCancel.recipient.complement}, 
+    const addressRecipient = `${orderCancel.recipient.street},
+                              ${orderCancel.recipient.number},
+                              ${orderCancel.recipient.cep},
+                              ${orderCancel.recipient.complement},
                               ${orderCancel.recipient.city}-
                               ${orderCancel.recipient.state}`;
 
