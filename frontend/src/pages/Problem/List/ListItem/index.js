@@ -24,7 +24,7 @@ export default function ProblemItem({ data, updateProblems }) {
     }
 
     try {
-      await api.delete(`/problem/${data._id}/cancel-delivery`);
+      await api.delete(`/problem/${data.delivery_id}/cancel-delivery`);
       updateProblems();
       toast.success('Encomenda cancelada com sucesso.');
     } catch (err) {

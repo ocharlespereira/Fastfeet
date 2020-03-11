@@ -37,7 +37,7 @@ export default function ProblemList() {
           </section>
           {problems.map(problem => (
             <ProblemItem
-              key={problem._id}
+              key={problem.delivery_id}
               data={problem}
               updateProblems={loadProblems}
             />
