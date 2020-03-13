@@ -36,8 +36,6 @@ export default function Routes() {
       />
 
       <Route path="/problems" component={ProblemList} isPrivate />
-
-      {/* <Route path="/problems" component={Problem} isPrivate /> */}
     </Switch>
   );
 }
