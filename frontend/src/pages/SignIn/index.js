@@ -30,6 +30,7 @@ export default function SignIn() {
         <div>
           <strong>SEU E-MAIL</strong>
           <Input name="email" type="email" placeholder="exemplo@email.com" />
+
           <strong>SUA SENHA</strong>
           <Input name="password" type="password" placeholder="*************" />
 
