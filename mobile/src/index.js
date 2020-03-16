@@ -3,6 +3,6 @@ import { View } from 'react-native';
 
 // import { Container } from './styles';
 
-export default function App() {
-  return <View>Olá Mundo</View>;
+export default function src() {
+  return <View />;
 }
