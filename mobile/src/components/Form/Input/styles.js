@@ -1,16 +1,15 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  background: #fff;
   width: 100%;
-
+  background: #fff;
   border-radius: 4px;
 `;
 
 export const TInput = styled.TextInput.attrs({
   placeholderTextColor: '#999',
 })`
-  font-family: 'Roboto-Regular';
   height: 45px;
+  font-family: 'Roboto-Regular';
   margin-left: 20px;
 `;
