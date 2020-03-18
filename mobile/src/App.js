@@ -4,5 +4,5 @@ import { Text } from 'react-native';
 // import { Container } from './styles';
 
 export default function App() {
-  return <Text>Olá mundo!</Text>;
+  return <Text>Olá mundo heuheu!</Text>;
 }

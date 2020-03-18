@@ -6,6 +6,7 @@ module.exports = {
   },
   extends: [
     'airbnb',
+    'plugin:react/recommended',
     'prettier',
     'prettier/react'],
   globals: {
@@ -13,6 +14,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     __DEV__: true,
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -20,11 +22,26 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier', 'import-helpers'],
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'import',
+    'react-hooks',
+    'prettier',
+    'eslint-plugin-import-helpers',
+    'import-helpers'
+  ],
   rules: {
-    'prettier/prettier': 'error',
-    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    // 'prettier/prettier': 'error',
+    'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-filename-extension': ['warn', { extensions: ['.js', '.jsx'] }],
+
+    'react/static-property-placement': 'off',
+    'react/sort-comp': 'off',
     'import/prefer-default-export': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'react/jsx-one-expression-per-line': 'off',
     'global-require': 'off',
@@ -39,7 +56,7 @@ module.exports = {
     'import-helpers/order-imports': [
       'warn',
       {
-        newlinesBetween: 'always', // new line between groups
+        newlinesBetween: 'always',
         groups: [
           '/^react/',
           'module',
