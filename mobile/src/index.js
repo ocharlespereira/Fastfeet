@@ -1,11 +1,26 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import { Text } from 'react-native';
+import { StatatusBar, View } from 'react-native'
+import { Provider } from 'react-redux'
 
-// import { Container } from './styles';
-import SignIn from '~/pages/SignIn';
+import { NavigationNativeContainer } from '@react-navigation/native'
+import { PersistGate } from 'redux-persist/es/integration/react'
+
+import '~/config/ReactotronConfig'
+
+import { store, persistor } from '~/store';
 
 import App from './App';
 
 export default function Index() {
-  return <SignIn />;
+  return (
+    <NavigationNativeContainer>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <StatatusBar backgroundColor="#7D40E7" barStyle="light-content" />
+          <App />
+        </PersistGate>
+      </Provider>
+    </NavigationNativeContainer>
+  );
 }
