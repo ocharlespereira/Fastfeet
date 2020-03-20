@@ -20,8 +20,11 @@ export function* signIn({ payload }) {
       avatar: response.data.avatar,
     }));
 
-  } catch (error) {
-    Alert.alert('Falha na autenticação, verifique seus dados.');
+  } catch (err) {
+    Alert.alert(
+      'Falha na autenticação',
+      'erro no login, verifique seus dados.'
+    );
     yield put(signFailure());
   }
 }
