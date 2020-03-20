@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StatatusBar, View } from 'react-native'
+import { StatatusBar } from 'react-native'
 import { Provider } from 'react-redux'
 
 import { NavigationNativeContainer } from '@react-navigation/native'

@@ -1,8 +1,9 @@
-import React from 'react';
-import { Text } from 'react-native';
+import { userSelect } from 'react-redux';
 
-// import { Container } from './styles';
+import createRouter from '~/routes'
 
 export default function App() {
-  return <Text>Olá mundo heuheu!</Text>;
+  const signed = userSelect(state => state.auth.signed);
+
+  return createRouter(signed);
 }
