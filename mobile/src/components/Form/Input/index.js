@@ -23,13 +23,13 @@ export default function Input({ name, style, ...rest }) {
       clearValue(ref) {
         ref.setNativeProps({ text: '' });
         ref._lastNativeText = '';
-      }
-    })
+      },
+    });
   }, [fieldName, registerField]);
 
   return (
     <Container style={style}>
       <TInput ref={inputRef} defaultValue={defaultValue} {...rest} />
     </Container>
-  )
+  );
 }

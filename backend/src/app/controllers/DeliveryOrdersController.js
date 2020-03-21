@@ -19,26 +19,24 @@ class DeliveryOrdersController {
     const { page } = req.query;
 
     const { id } = req.params;
-    const checkDelivery = await Deliveryman.findByPk(id);
+    const delivery = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email', 'created_at'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
 
-    if (!checkDelivery) {
+    if (!delivery) {
       return res
         .status(401)
         .json({ error: 'Deliveryman is not a registration.' });
     }
 
-    const orders = await Order.findAll({
-      limit: 10,
-      offset: (page - 1) * 10,
-      where: {
-        deliveryman_id: id,
-        start_date: null,
-        canceled_at: null,
-      },
-      order: [['id', 'DESC']],
-    });
-
-    return res.json(orders);
+    return res.json(delivery);
   }
 
   async update(req, res) {
