@@ -21,7 +21,7 @@ export function* signIn({ payload }) {
         avatar: response.data.avatar,
       })
     );
-  } catch (err) {
+  } catch (error) {
     Alert.alert(
       'Falha na autenticação',
       'erro no login, verifique seus dados.'
