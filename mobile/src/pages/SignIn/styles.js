@@ -4,7 +4,7 @@ import Button from '~/components/Button';
 import { Input as UnInput } from '~/components/Form';
 
 export const Container = styled.View`
-  flex:1;
+  flex: 1;
   background: #7d40e7;
   align-items: center;
   justify-content: center;

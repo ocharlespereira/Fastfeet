@@ -4,6 +4,7 @@ import { Op } from 'sequelize';
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
+import File from '../models/File';
 import Signature from '../models/Signature';
 
 /**
@@ -16,7 +17,7 @@ import Signature from '../models/Signature';
 
 class DeliveryOrdersController {
   async index(req, res) {
-    const { page } = req.query;
+    // const { page } = req.query;
 
     const { id } = req.params;
     const delivery = await Deliveryman.findByPk(id, {
