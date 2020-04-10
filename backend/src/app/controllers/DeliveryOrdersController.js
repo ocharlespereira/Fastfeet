@@ -19,25 +19,73 @@ class DeliveryOrdersController {
   async index(req, res) {
     // const { page } = req.query;
 
-    const { id } = req.params;
-    const delivery = await Deliveryman.findByPk(id, {
-      attributes: ['id', 'name', 'email', 'created_at'],
+    // const { id } = req.params;
+    // const delivery = await Deliveryman.findByPk(id, {
+    //   attributes: ['id', 'name', 'email', 'created_at'],
+    //   include: [
+    //     {
+    //       model: File,
+    //       as: 'avatar',
+    //       attributes: ['id', 'path', 'url'],
+    //     },
+    //   ],
+    // });
+
+    // if (!delivery) {
+    //   return res
+    //     .status(401)
+    //     .json({ error: 'Deliveryman is not a registration.' });
+    // }
+
+    // return res.json(delivery);
+    const { id: deliverymanId } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(deliverymanId);
+
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'Deliveryman does not exists' });
+    }
+
+    const deliveries = await Order.findAll({
+      where: {
+        deliveryman_id: deliverymanId,
+        signature_id: null,
+        canceled_at: null,
+      },
+      order: ['id'],
+      attributes: [
+        'id',
+        'deliveryman_id',
+        'product',
+        'status',
+        'start_date',
+        'end_date',
+        'canceled_at',
+      ],
       include: [
         {
-          model: File,
-          as: 'avatar',
-          attributes: ['id', 'path', 'url'],
+          model: Recipient,
+          as: 'recipient',
+          attributes: [
+            'id',
+            'name',
+            'state',
+            'city',
+            'street',
+            'number',
+            'complement',
+            'zip_code',
+          ],
+        },
+        {
+          model: Signature,
+          as: 'signature',
+          attributes: ['id', 'url', 'path'],
         },
       ],
     });
 
-    if (!delivery) {
-      return res
-        .status(401)
-        .json({ error: 'Deliveryman is not a registration.' });
-    }
-
-    return res.json(delivery);
+    return res.json(deliveries);
   }
 
   async update(req, res) {

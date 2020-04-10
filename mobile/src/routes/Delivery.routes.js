@@ -25,6 +25,13 @@ export default function DeliveryRoutes() {
         name="Entregas"
         component={Deliveries}
       />
+      {/* <Stack.Screen
+        name="Detalhes"
+        options={{
+          title: 'Detalhes da encomenda',
+        }}
+        component={DeliveryDetails}
+      /> */}
     </Stack.Navigator>
   );
 }
