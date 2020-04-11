@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,7 +52,7 @@ export default function Deliveries() {
 
       const res =
         typeDeliveries === 'PENDENTES'
-          ? await api.get(`/deliveryman/${auth.id}`) // mecher aqui na url
+          ? await api.get(`/delivery/${auth.id}`) // mecher aqui na url
           : await api.get(`/delivery/${auth.id}/orders`);
 
       const data = res.data.map(delivery => ({

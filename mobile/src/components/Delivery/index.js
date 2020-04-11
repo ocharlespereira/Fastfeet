@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 
 import Progress from '~/components/DeliveryProgress';
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 import {
   Container,
@@ -27,7 +27,7 @@ export default function Delivery({ data }) {
         <Title>Encomenda 0{data.id}</Title>
       </TitleContainer>
 
-      <Progress status={data.status} />
+      {/* <Progress status={data.status} /> */}
 
       <Details>
         <Detail>
@@ -36,7 +36,7 @@ export default function Delivery({ data }) {
         </Detail>
         <Detail>
           <TitleDetail>Cidade</TitleDetail>
-          <TextDetail>{data.repicient.city}</TextDetail>
+          <TextDetail>{data.recipient.city}</TextDetail>
         </Detail>
       </Details>
       <TextLink

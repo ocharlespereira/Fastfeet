@@ -22,16 +22,23 @@ routes.post('/sessions', SessionController.store);
 routes.post('/signatures', upload.single('file'), SignatureController.store);
 
 /**
- * Entregador verifica as ordens em aberto
+ * Login do entregador
  */
 routes.get('/delivery/:id/orders', DeliveryOrdersController.show);
-routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
-// routes.put('/delivered/:id/orders/:idOrder', DeliveryOrdersController.show);
-
 /**
  * Entregas realizadas pelos entregadores
  */
-routes.get('/deliveryman/:id/deliveries', DeliveriesController.index);
+routes.get('/delivery/:id/deliveries', DeliveriesController.index);
+
+/**
+ * Entregador verifica as ordens em aberto
+ */
+routes.get('/delivery/:id', DeliveryOrdersController.index);
+
+/**
+ * Entregas a serem confirmadas
+ */
+// routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
 
 /**
  * Problemas nas Entregas
