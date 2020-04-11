@@ -27,7 +27,7 @@ export default function Delivery({ data }) {
         <Title>Encomenda 0{data.id}</Title>
       </TitleContainer>
 
-      {/* <Progress status={data.status} /> */}
+      <Progress status={data.status} />
 
       <Details>
         <Detail>
@@ -40,7 +40,7 @@ export default function Delivery({ data }) {
         </Detail>
       </Details>
       <TextLink
-        onPress={() => navigation.navigate('Detalhes', { Delivery: data })}
+        onPress={() => navigation.navigate('Detalhes', { Delivery: data })} // mecher aqui também
       >
         Ver Detalhe
       </TextLink>
