@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import '~/config/ReactotronConfig'
+import '~/config/ReactotronConfig';
 
 import { store, persistor } from '~/store';
 

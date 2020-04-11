@@ -9,7 +9,7 @@ import Delivery from '~/components/Delivery';
 import NamePhoto from '~/components/NamePhoto';
 import api from '~/services/api';
 import { signOut } from '~/store/modules/auth/actions';
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 import {
   Container,
@@ -66,6 +66,7 @@ export default function Deliveries() {
 
       setDeliveries(data);
     }
+    // console.tron.log(res);
 
     loadDelivery();
   }, [auth.id, typeDeliveries]);

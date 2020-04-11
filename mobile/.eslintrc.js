@@ -28,6 +28,8 @@ module.exports = {
     'eslint-plugin-import-helpers',
   ],
   rules: {
+    'no-console': 'off',
+    'no-unused-vars': 'error',
     'prettier/prettier': 'error',
     'react/prop-types': 'off',
     'react/jsx-filename-extension': [
@@ -45,7 +47,8 @@ module.exports = {
     'no-param-reassign': 'off',
     'react/jsx-props-no-spreading': 'off',
     'no-underscore-dangle': 'off',
-    camelcase: 'off',
+    'camelcase': 'off',
+    'no-unused-vars': ['error', { 'argsIgnorePattern': 'next' }],
     'import-helpers/order-imports': [
       'warn',
       {

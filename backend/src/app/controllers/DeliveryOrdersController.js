@@ -17,27 +17,6 @@ import Signature from '../models/Signature';
 
 class DeliveryOrdersController {
   async index(req, res) {
-    // const { page } = req.query;
-
-    // const { id } = req.params;
-    // const delivery = await Deliveryman.findByPk(id, {
-    //   attributes: ['id', 'name', 'email', 'created_at'],
-    //   include: [
-    //     {
-    //       model: File,
-    //       as: 'avatar',
-    //       attributes: ['id', 'path', 'url'],
-    //     },
-    //   ],
-    // });
-
-    // if (!delivery) {
-    //   return res
-    //     .status(401)
-    //     .json({ error: 'Deliveryman is not a registration.' });
-    // }
-
-    // return res.json(delivery);
     const { id: deliverymanId } = req.params;
 
     const deliveryman = await Deliveryman.findByPk(deliverymanId);
@@ -60,6 +39,7 @@ class DeliveryOrdersController {
         'status',
         'start_date',
         'end_date',
+        'created_at',
         'canceled_at',
       ],
       include: [
@@ -86,6 +66,27 @@ class DeliveryOrdersController {
     });
 
     return res.json(deliveries);
+  }
+
+  async show(req, res) {
+    const { id } = req.params;
+
+    const deliveryman = await Deliveryman.findByPk(id, {
+      attributes: ['id', 'name', 'email', 'created_at'],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    if (!deliveryman) {
+      return res.status(400).json({ error: 'Delivery man does not exists' });
+    }
+
+    return res.json(deliveryman);
   }
 
   async update(req, res) {
@@ -157,49 +158,49 @@ class DeliveryOrdersController {
     });
   }
 
-  async show(req, res) {
-    /**
-     * Verifica se o signature_id ainda não foi preenchido
-     */
-    const { id, idOrder } = req.params;
+  //  async show(req, res) {
+  //     /**
+  //      * Verifica se o signature_id ainda não foi preenchido
+  //      */
+  //     const { id, idOrder } = req.params;
 
-    const orderSignatureNull = await Order.findByPk(idOrder, {
-      where: {
-        deliveryman_id: id,
-        canceled_at: null,
-        start_date: { [Op.ne]: null },
-        signature_id: null,
-      },
-    });
+  //     const orderSignatureNull = await Order.findByPk(idOrder, {
+  //       where: {
+  //         deliveryman_id: id,
+  //         canceled_at: null,
+  //         start_date: { [Op.ne]: null },
+  //         signature_id: null,
+  //       },
+  //     });
 
-    orderSignatureNull.update(req.body);
+  //     orderSignatureNull.update(req.body);
 
-    /**
-     * Verifica se o signature_id foi preenchido para atualizar o end_date
-     */
-    const orderSignature = await Order.findByPk(idOrder, {
-      include: [
-        {
-          model: Signature,
-          as: 'signature',
-          attributes: ['id', 'path', 'url'],
-        },
-      ],
-      where: {
-        deliveryman_id: id,
-        canceled_at: null,
-        start_date: { [Op.ne]: null },
-        signature_id: { [Op.ne]: null },
-      },
-    });
+  //     /**
+  //      * Verifica se o signature_id foi preenchido para atualizar o end_date
+  //      */
+  //     const orderSignature = await Order.findByPk(idOrder, {
+  //       include: [
+  //         {
+  //           model: Signature,
+  //           as: 'signature',
+  //           attributes: ['id', 'path', 'url'],
+  //         },
+  //       ],
+  //       where: {
+  //         deliveryman_id: id,
+  //         canceled_at: null,
+  //         start_date: { [Op.ne]: null },
+  //         signature_id: { [Op.ne]: null },
+  //       },
+  //     });
 
-    if (orderSignature) {
-      orderSignature.end_date = new Date();
-      await orderSignature.save();
-      // return res.json(orderSignature);
-    }
+  //     if (orderSignature) {
+  //       orderSignature.end_date = new Date();
+  //       await orderSignature.save();
+  //       // return res.json(orderSignature);
+  //     }
 
-    return res.json(orderSignature);
-  }
+  //     return res.json(orderSignature);
+  //   }
 }
 export default new DeliveryOrdersController();

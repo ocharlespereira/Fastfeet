@@ -6,7 +6,7 @@ import { Form } from '@unform/mobile';
 
 import logo from '~/assets/logo.png';
 import { signInRequest } from '~/store/modules/auth/actions';
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 import { Container, Input, SubmitButton } from './styles';
 

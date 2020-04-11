@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Profile from '~/pages/Profile';
 import DeliveryRoutes from '~/routes/Delivery.routes';
-import colors from '~/styles/colors';
+import { colors } from '~/styles/colors';
 
 const Tab = createBottomTabNavigator();
 
