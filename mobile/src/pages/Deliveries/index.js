@@ -53,7 +53,7 @@ export default function Deliveries() {
       const res =
         typeDeliveries === 'PENDENTES'
           ? await api.get(`/delivery/${auth.id}`) // mecher aqui na url
-          : await api.get(`/delivery/${auth.id}/orders`);
+          : await api.get(`/delivery/${auth.id}/deliveries`);
 
       const data = res.data.map(delivery => ({
         ...delivery,
@@ -67,7 +67,6 @@ export default function Deliveries() {
 
       setDeliveries(data);
     }
-    // console.tron.log(res);
 
     loadDelivery();
   }, [auth.id, typeDeliveries]);
