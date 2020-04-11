@@ -3,6 +3,7 @@ export const colors = {
   danger: '#E74040',
   ViewProblem: '#E7BA40',
 
+  font: '#444',
   label: '#666',
   input: '#999',
 };
