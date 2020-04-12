@@ -19,7 +19,6 @@ const routes = new Router();
 const upload = multer(multerConfig);
 
 routes.post('/sessions', SessionController.store);
-routes.post('/signatures', upload.single('file'), SignatureController.store);
 
 /**
  * Login do entregador
@@ -46,6 +45,9 @@ routes.get('/delivery/:id', DeliveryOrdersController.index);
 routes.get('/delivery/:id/problems', ProblemController.show);
 routes.post('/delivery/:id/problems', ProblemController.store);
 
+routes.post('/files', upload.single('file'), FileController.store);
+routes.post('/signatures', upload.single('file'), SignatureController.store);
+
 /**
  * Acesso a Usuários autenticados (Admins)
  */
@@ -59,8 +61,6 @@ routes.get('/recipients/:id', RecipientController.show);
 routes.post('/recipients', RecipientController.store);
 routes.put('/recipients/:id', RecipientController.update);
 routes.delete('/recipients/:id', RecipientController.delete);
-
-routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/deliverymans', DeliverymanController.index);
 routes.get('/deliverymans/:id', DeliverymanController.show);
