@@ -3,6 +3,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Deliveries from '~/pages/Deliveries';
+// import DeliveryConfirmPhoto from '~/pages/DeliveryConfirmPhoto';
+import DeliveryDetails from '~/pages/DeliveryDetails';
 
 const Stack = createStackNavigator();
 
@@ -25,12 +27,19 @@ export default function DeliveryRoutes() {
         name="Entregas"
         component={Deliveries}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Detalhes"
         options={{
           title: 'Detalhes da encomenda',
         }}
         component={DeliveryDetails}
+      />
+      {/* <Stack.Screen
+        name="ConfirmPhoto"
+        options={{
+          title: 'Confirmar entrega',
+        }}
+        component={DeliveryConfirmPhoto}
       /> */}
     </Stack.Navigator>
   );

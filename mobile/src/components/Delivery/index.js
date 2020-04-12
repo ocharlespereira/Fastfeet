@@ -40,7 +40,7 @@ export default function Delivery({ data }) {
         </Detail>
       </Details>
       <TextLink
-        onPress={() => navigation.navigate('Detalhes', { Delivery: data })} // mecher aqui também
+        onPress={() => navigation.navigate('Detalhes', { delivery: data })} // mecher aqui também
       >
         Ver Detalhe
       </TextLink>

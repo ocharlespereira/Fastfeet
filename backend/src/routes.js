@@ -35,9 +35,9 @@ routes.get('/delivery/:id/deliveries', DeliveriesController.index);
 routes.get('/delivery/:id', DeliveryOrdersController.index);
 
 /**
- * Entregas a serem confirmadas
+ * Entregas a serem retiradas
  */
-// routes.put('/delivery/:id/orders/:idOrder', DeliveryOrdersController.update);
+routes.put('/delivery/:id/orders/:orderId', DeliveryOrdersController.update);
 
 /**
  * Problemas nas Entregas
