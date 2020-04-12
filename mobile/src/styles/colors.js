@@ -10,3 +10,30 @@ export const colors = {
   input: '#999',
   border: '#eee',
 };
+
+export const photoColors = [
+  {
+    color: '#A28FD0',
+    bg: '#F4EFFC',
+  },
+  {
+    color: '#CB946C',
+    bg: '#FCF4EE',
+  },
+  {
+    color: '#83CEC9',
+    bg: '#EBFBFA',
+  },
+  {
+    color: '#CC7584',
+    bg: '#FFEEF1',
+  },
+  {
+    color: '#A8D080',
+    bg: '#F4F9EF',
+  },
+  {
+    color: '#CCCC8B',
+    bg: '#FCFCEF',
+  },
+];
