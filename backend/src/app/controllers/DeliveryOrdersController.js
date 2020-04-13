@@ -1,4 +1,14 @@
-import { parseISO, isBefore, setHours, isAfter } from 'date-fns';
+import {
+  parseISO,
+  isBefore,
+  setHours,
+  isAfter,
+  startOfDay,
+  getHours,
+  endOfDay,
+  subHours,
+} from 'date-fns';
+import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
 import Order from '../models/Order';
@@ -90,61 +100,64 @@ class DeliveryOrdersController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      start_date: Yup.date().required(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'validation fails' });
-    }
-
-    const { id: deliverymanId, orderId: deliveryId } = req.params;
-
-    /*
-     * Verifique se o entregador existe
+    /**
+     * Verifica se o entregador está no prazo entre as 08:00 e s 18:00.
      */
-    const deliveryman = await Deliveryman.findByPk(deliverymanId);
-
-    if (!deliveryman) {
-      return res.status(400).json({ error: 'Delivery man does not exists' });
-    }
-
-    /*
-     * Verifique se o pedido existe
-     */
-    const order = await Order.findByPk(deliveryId);
-
-    if (!order) {
-      return res.status(400).json({ error: 'Delivery does not exists' });
-    }
-
-    const { count } = await Order.findAndCountAll({
-      where: {
-        deliveryman_id: deliverymanId,
-        start_date: null,
-        signature_id: null,
-      },
-    });
-
-    if (count === 5) {
+    const { start_date } = req.body;
+    // convert a data em apenas horas com o decrescimo de 3 horas subHours
+    const parseDate = subHours(parseISO(start_date), 3);
+    // convert a data em apenas horas com o acrescimo de 3 horas
+    if (getHours(parseDate) + 3 <= '08' || getHours(parseDate) + 3 >= '18') {
       return res
         .status(400)
-        .json({ error: 'Maximum number of withdrawals reached' });
+        .json({ error: 'Products can be picked up between 08:00 and 18:00.' });
     }
-
-    const { start_date } = req.body;
-    const start_date_ISO = parseISO(start_date);
-
-    if (
-      isBefore(start_date_ISO, setHours(new Date(), 8)) ||
-      isAfter(start_date_ISO, setHours(new Date()), 7)
-    ) {
-      return res.status(400).json({ error: 'Invalid time' });
+    /**
+     * Verifica se o entregador já fez mais de 5 retiradas no dia
+     */
+    const countOrderDay = await Order.findAndCountAll({
+      where: {
+        start_date: {
+          [Op.between]: [startOfDay(parseDate), endOfDay(parseDate)],
+        },
+        canceled_at: null,
+        deliveryman_id: req.params.id,
+      },
+    });
+    if (countOrderDay.count >= 5) {
+      return res
+        .status(400)
+        .json({ error: 'Only 5 retirees are allowed per delivery person.' });
     }
-
-    await order.update({ start_date, status: 'RETIRADA' });
-
-    return res.json({});
+    /**
+     * Busca ordens em aberto para entrega que não estejam canceladas
+     */
+    const { orderId } = req.params;
+    const orderExist = await Order.findByPk(orderId, {
+      where: {
+        deliveryman_id: req.params.id,
+        canceled_at: null,
+        start_date: null,
+      },
+    });
+    if (!orderExist) {
+      return res
+        .status(400)
+        .json({ error: 'Order already exists for deliveryman.' });
+    }
+    const {
+      deliveryman_id,
+      recipient_id,
+      signature_id,
+      canceled_at,
+    } = await orderExist.update({ start_date, status: 'RETIRADA' });
+    return res.json({
+      deliveryman_id,
+      recipient_id,
+      start_date,
+      signature_id,
+      canceled_at,
+    });
   }
 }
 export default new DeliveryOrdersController();
