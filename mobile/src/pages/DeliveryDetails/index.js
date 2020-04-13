@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { Alert, StatusBar, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -36,7 +37,7 @@ export default function DeliveryDetails() {
           start_date: new Date(),
         });
       } catch (error) {
-        Alert.alert('Horário de retiradaa inválido.');
+        Alert.alert('Horário de retirada inválido.');
       }
     }
 

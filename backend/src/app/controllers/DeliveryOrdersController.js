@@ -137,7 +137,7 @@ class DeliveryOrdersController {
 
     if (
       isBefore(start_date_ISO, setHours(new Date(), 8)) ||
-      isAfter(start_date_ISO, setHours(new Date(), 18))
+      isAfter(start_date_ISO, setHours(new Date()), 7)
     ) {
       return res.status(400).json({ error: 'Invalid time' });
     }
