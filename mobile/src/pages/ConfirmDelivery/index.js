@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,8 +17,8 @@ import {
   SendButton,
 } from './styles';
 
-export default function ConfirmDelivery({ route, navigation }) {
-  const { id } = route.params;
+export default function ConfirmDelivery({ navigation, route }) {
+  const { orders } = route.params; // aqui
   const [cameraOpen, setCameraOpen] = useState(false);
   const [preview, setPreview] = useState('');
   const [fileId, setFileId] = useState(-1);
@@ -31,13 +32,19 @@ export default function ConfirmDelivery({ route, navigation }) {
   async function handleSubmit() {
     if (fileId === -1) {
       Alert.alert(
-        'Campos Obrigatórios não preenchidos',
-        'Favor incluir uma foto da assinatura do destinatário!'
+        'Campos obrigatórios não preenchidos',
+        'Por favor, inclua uma foto da assinatura do destinatário!'
       );
     } else {
       try {
-        await api.put(`/delivery/${id}/orders/${fileId}/finish`);
-        navigation.push('Entregas');
+        await api.put(
+          `/delivery/${orders.deliveryman_id}/orders/${orders.id}/finish`,
+          {
+            end_date: new Date(),
+            signature_id: fileId,
+          }
+        );
+        navigation.push('Deliveries');
         Alert.alert(
           'Entrega confirmada',
           'A entrega foi confirmada com sucesso!'
@@ -45,7 +52,7 @@ export default function ConfirmDelivery({ route, navigation }) {
       } catch (error) {
         Alert.alert(
           'Erro ao confirmar entrega',
-          'Não foi possivel confirmar a entrega!'
+          'Não foi possível confirmar a entrega!'
         );
       }
     }
@@ -56,8 +63,9 @@ export default function ConfirmDelivery({ route, navigation }) {
   return (
     <Container>
       <Background />
+
       <Preview
-        preview={preview.length === 0 ? previewImage : { uri: preview }}
+        source={preview.length === 0 ? previewImage : { uri: preview }}
       />
       <CameraButton onPress={() => setCameraOpen(true)}>
         <Icon name="photo-camera" size={36} style={{ color: 'white' }} />
@@ -73,7 +81,7 @@ ConfirmDelivery.propTypes = {
   }).isRequired,
   route: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.number,
+      orders: PropTypes.number,
     }),
   }).isRequired,
 };

@@ -14,6 +14,7 @@ export const Background = styled.View`
 `;
 
 export const Preview = styled.Image`
+  /* margin-top: 40px; */
   position: absolute;
   top: 15px;
   align-self: center;
@@ -35,4 +36,5 @@ export const SendButton = styled(Button)`
   margin-left: 20px;
   margin-right: 20px;
   top: 65%;
+  background: ${colors.primary};
 `;

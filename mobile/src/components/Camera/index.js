@@ -1,9 +1,13 @@
+/* eslint-disable prettier/prettier */
 import React, { useRef, useState } from 'react';
 import { Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import PropTypes from 'prop-types';
+
 import api from '~/services/api';
+
 import { TCamera, CameraButton, LoadingSpinner } from './styles';
 
 export default function Camera({ loadPreview }) {

@@ -2,8 +2,8 @@ import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Deliveries from '~/pages/Deliveries';
 import ConfirmDelivery from '~/pages/ConfirmDelivery';
+import Deliveries from '~/pages/Deliveries';
 import DeliveryDetails from '~/pages/DeliveryDetails';
 
 const Stack = createStackNavigator();
