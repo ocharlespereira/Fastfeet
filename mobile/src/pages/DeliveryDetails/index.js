@@ -119,7 +119,7 @@ export default function DeliveryDetails() {
               <OptionTitle>Realizar{`\n`}Retirada</OptionTitle>
             </Option>
           ) : (
-              <Option onPress={() => navigation.navigate('ConfirmPhoto')}>
+              <Option onPress={() => navigation.navigate('ConfirmDelivery')}>
                 <Icon name="check-circle" color={colors.primary} size={20} />
                 <OptionTitle>Confirmar{`\n`}Entrega</OptionTitle>
               </Option>

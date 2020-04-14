@@ -21,32 +21,33 @@ const upload = multer(multerConfig);
 routes.post('/sessions', SessionController.store);
 
 /**
+ * Upload de Imagens
+ */
+routes.post('/files', upload.single('file'), FileController.store);
+routes.post('/signatures', upload.single('file'), SignatureController.store);
+
+/**
  * Login do entregador
  */
 routes.get('/delivery/:id/orders', DeliveryOrdersController.show);
-/**
- * Entregas realizadas pelos entregadores
- */
+
+// Entregas realizadas pelos entregadores
 routes.get('/delivery/:id/deliveries', DeliveriesController.index);
 
-/**
- * Entregador verifica as ordens em aberto
- */
+// Entregador verifica as ordens em aberto
 routes.get('/delivery/:id', DeliveryOrdersController.index);
 
-/**
- * Entregas a serem retiradas
- */
+// Entregas a serem retiradas
 routes.put('/delivery/:id/orders/:orderId', DeliveryOrdersController.update);
+
+// Finalizar entrega informando a foto
+routes.put('/delivery/:id/orders/:orderId/finish', DeliveriesController.update);
 
 /**
  * Problemas nas Entregas
  */
 routes.get('/delivery/:id/problems', ProblemController.show);
 routes.post('/delivery/:id/problems', ProblemController.store);
-
-routes.post('/files', upload.single('file'), FileController.store);
-routes.post('/signatures', upload.single('file'), SignatureController.store);
 
 /**
  * Acesso a Usuários autenticados (Admins)
