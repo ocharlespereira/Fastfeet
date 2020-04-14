@@ -52,16 +52,16 @@ export default function Deliveries() {
 
       const res =
         typeDeliveries === 'PENDENTES'
-          ? await api.get(`/delivery/${auth.id}`) // mecher aqui na url
+          ? await api.get(`/delivery/${auth.id}`)
           : await api.get(`/delivery/${auth.id}/deliveries`);
 
       const data = res.data.map(delivery => ({
         ...delivery,
         start_date_formated: delivery.start_date
-          ? format(parseISO(delivery?.start_date), 'dd/MM/yyyy')
+          ? format(parseISO(delivery.start_date), 'dd/MM/yyyy')
           : '- - / - - / - -',
         end_date_formated: delivery.end_date
-          ? format(parseISO(delivery?.end_date), 'dd/MM/yyyy')
+          ? format(parseISO(delivery.end_date), 'dd/MM/yyyy')
           : '- - / - - / - -',
       }));
 
@@ -76,7 +76,7 @@ export default function Deliveries() {
       <Profile>
         <ActionContainer>
           {profile?.avatar ? (
-            <Avatar source={{ url: profile?.avatar?.url }} />
+            <Avatar source={{ uri: profile?.avatar?.url }} />
           ) : (
               <>{profile?.name && <NamePhoto name={profile?.name} />}</>
             )}

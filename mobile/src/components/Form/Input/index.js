@@ -7,7 +7,6 @@ import { Container, TInput } from './styles';
 export default function Input({ name, style, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue = '' } = useField(name);
-
   useEffect(() => {
     registerField({
       name: fieldName,
@@ -26,7 +25,6 @@ export default function Input({ name, style, ...rest }) {
       },
     });
   }, [fieldName, registerField]);
-
   return (
     <Container style={style}>
       <TInput ref={inputRef} defaultValue={defaultValue} {...rest} />

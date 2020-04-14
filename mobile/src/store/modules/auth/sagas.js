@@ -22,10 +22,7 @@ export function* signIn({ payload }) {
       })
     );
   } catch (error) {
-    Alert.alert(
-      'Falha na autenticação',
-      'erro no login, verifique seus dados.'
-    );
+    Alert.alert('Falha na autenticação', 'O seu ID está invalido.');
     yield put(signFailure());
   }
 }

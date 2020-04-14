@@ -12,10 +12,11 @@ export const Container = styled.SafeAreaView`
   justify-content: center;
 `;
 export const Avatar = styled(AvatarComponent)`
-  height: 137px;
-  width: 137px;
-  border-radius: 68.5px;
+  height: 180px;
+  width: 180px;
+  border-radius: 66.6px;
 `;
+
 export const Content = styled.View`
   align-items: center;
   padding: 0 36px;

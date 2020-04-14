@@ -27,10 +27,10 @@ export default function SignIn() {
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input
           name="id"
-          keyboardType="number-pad"
-          placeholder="Informe seu ID no cadastro"
+          keyboardType="numeric"
+          placeholder="Informe seu ID de cadastro"
           autoCorrect={false}
-          returnKeyType="Entrar"
+          returnKeyType="send"
           autoCapitalize="none"
         />
         <SubmitButton

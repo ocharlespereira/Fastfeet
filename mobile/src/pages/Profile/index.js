@@ -17,7 +17,7 @@ import {
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const profile = useSelector(state => state?.user?.profile);
+  const user = useSelector(state => state?.user?.profile);
 
   function handleLogout() {
     dispatch(signOut());
@@ -26,19 +26,19 @@ export default function Profile() {
   return (
     <Container>
       <Content>
-        {profile?.avatar ? (
-          <Avatar source={{ uri: profile?.avatar?.url }} />
+        {user?.avatar ? (
+          <Avatar source={{ uri: user?.avatar?.url }} />
         ) : (
-            <>{profile?.name && <NamePhoto name={profile?.name} />}</>
+            <>{user?.name && <NamePhoto name={user?.name} />}</>
           )}
 
         <Details>
           <Label>Name Completo</Label>
-          <Information>{profile.name}</Information>
+          <Information>{user?.name}</Information>
           <Label>Email</Label>
-          <Information>{profile?.email}</Information>
+          <Information>{user?.email}</Information>
           <Label>Data de cadastro</Label>
-          <Information>{profile?.created_at}</Information>
+          <Information>{user?.created_at}</Information>
         </Details>
 
         <LogoutButton onPress={handleLogout} loading={false}>

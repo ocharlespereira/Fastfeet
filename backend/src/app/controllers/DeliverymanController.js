@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
@@ -20,7 +21,7 @@ class DeliverymanController {
     });
 
     if (!deliveryman) {
-      return res.status(400).json({ error: 'Delivery man does not exists' });
+      return res.status(400).json({ error: 'Deliveryman does not exists' });
     }
 
     return res.json(deliveryman);
@@ -31,36 +32,36 @@ class DeliverymanController {
 
     const delivery = nameLike
       ? await Deliveryman.findAll({
-          attributes: ['id', 'name', 'email', 'avatar_id'],
-          limit: 20,
-          offset: (page - 1) * 20,
-          include: [
-            {
-              model: File,
-              as: 'avatar',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-          where: {
-            name: {
-              [Op.iLike]: `%${nameLike}%`,
-            },
+        attributes: ['id', 'name', 'email', 'avatar_id'],
+        limit: 20,
+        offset: (page - 1) * 20,
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+            attributes: ['id', 'path', 'url'],
           },
-          order: [['id', 'ASC']],
-        })
+        ],
+        where: {
+          name: {
+            [Op.iLike]: `%${nameLike}%`,
+          },
+        },
+        order: [['id', 'ASC']],
+      })
       : await Deliveryman.findAll({
-          attributes: ['id', 'name', 'email', 'avatar_id'],
-          limit: 20,
-          offset: (page - 1) * 20,
-          include: [
-            {
-              model: File,
-              as: 'avatar',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-          order: [['id', 'ASC']],
-        });
+        attributes: ['id', 'name', 'email', 'avatar_id'],
+        limit: 20,
+        offset: (page - 1) * 20,
+        include: [
+          {
+            model: File,
+            as: 'avatar',
+            attributes: ['id', 'path', 'url'],
+          },
+        ],
+        order: [['id', 'ASC']],
+      });
 
     return res.json(delivery);
   }
