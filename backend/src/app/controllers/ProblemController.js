@@ -39,7 +39,7 @@ class ProblemController {
     /**
      * Verifica se existe a notificação cadastrado
      */
-    const problem = await Problem.findOne({
+    const problem = await Problem.findAll({
       where: { delivery_id: id },
     });
 
