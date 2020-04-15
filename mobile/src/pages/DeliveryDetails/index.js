@@ -36,8 +36,10 @@ export default function DeliveryDetails() {
         await api.put(`/delivery/${auth.id}/orders/${delivery.id}`, {
           start_date: new Date(),
         });
+        Alert.alert('Entrega retirada com sucesso!')
       } catch (error) {
-        Alert.alert('Horário de retirada inválido.');
+        Alert.alert('Horário de retirada inválido',
+          'Retirada somente em horarios comerciais entre as 08h e 18h!');
       }
     }
 
@@ -105,7 +107,8 @@ export default function DeliveryDetails() {
         </Card>
 
         <Menu>
-          <Option>
+          <Option onPress={() =>
+            navigation.navigate('DeliveryProblem', { orderId: delivery.id })}>
             <Icon name="highlight-off" color={colors.danger} size={20} />
             <OptionTitle>Informar{`\n`}Problema</OptionTitle>
           </Option>
@@ -119,7 +122,8 @@ export default function DeliveryDetails() {
               <OptionTitle>Realizar{`\n`}Retirada</OptionTitle>
             </Option>
           ) : (
-              <Option onPress={() => navigation.navigate('ConfirmDelivery', { orders: delivery })}>
+              <Option onPress={() =>
+                navigation.navigate('ConfirmDelivery', { orders: delivery })}>
                 <Icon name="check-circle" color={colors.primary} size={20} />
                 <OptionTitle>Confirmar{`\n`}Entrega</OptionTitle>
               </Option>

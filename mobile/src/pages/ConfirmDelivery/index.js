@@ -12,13 +12,14 @@ import api from '~/services/api';
 import {
   Container,
   Background,
+  Content,
   Preview,
   CameraButton,
   SendButton,
 } from './styles';
 
 export default function ConfirmDelivery({ navigation, route }) {
-  const { orders } = route.params; // aqui
+  const { orders } = route.params;
   const [cameraOpen, setCameraOpen] = useState(false);
   const [preview, setPreview] = useState('');
   const [fileId, setFileId] = useState(-1);
@@ -44,7 +45,7 @@ export default function ConfirmDelivery({ navigation, route }) {
             signature_id: fileId,
           }
         );
-        navigation.push('Deliveries');
+        navigation.push('Entregas');
         Alert.alert(
           'Entrega confirmada',
           'A entrega foi confirmada com sucesso!'
@@ -63,14 +64,15 @@ export default function ConfirmDelivery({ navigation, route }) {
   return (
     <Container>
       <Background />
-
-      <Preview
-        source={preview.length === 0 ? previewImage : { uri: preview }}
-      />
-      <CameraButton onPress={() => setCameraOpen(true)}>
-        <Icon name="photo-camera" size={36} style={{ color: 'white' }} />
-      </CameraButton>
-      <SendButton onPress={handleSubmit}>Enviar</SendButton>
+      <Content>
+        <Preview
+          source={preview.length === 0 ? previewImage : { uri: preview }}
+        />
+        <CameraButton onPress={() => setCameraOpen(true)}>
+          <Icon name="photo-camera" size={36} style={{ color: 'white' }} />
+        </CameraButton>
+        <SendButton onPress={handleSubmit}>Enviar</SendButton>
+      </Content>
     </Container>
   );
 }
