@@ -30,7 +30,10 @@ export default function DeliveryProblem() {
       Alert.alert('Problema cadastrado com sucesso!');
       navigation.navigate('Entregas');
     } catch (errs) {
-      Alert.alert(errs.reponse.data.error);
+      Alert.alert(
+        'Erro no envio de problema',
+        'É preciso descrever o problema.'
+      );
     }
 
     setLoading(false);

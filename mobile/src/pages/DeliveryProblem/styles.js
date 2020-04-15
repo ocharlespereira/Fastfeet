@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const Background = styled.View`
   background: ${colors.primary};
-  height: 155px;
+  height: 135px;
 `;
 
 export const Content = styled.View`
