@@ -72,13 +72,13 @@ class ProblemController {
     /**
      * Verifica se existe a notificação cadastrado
      */
-    const problemExist = await Problem.findOne({
-      where: { delivery_id: id },
-    });
+    // const problemExist = await Problem.findOne({
+    //   where: { delivery_id: id },
+    // });
 
-    if (problemExist) {
-      return res.status(400).json({ error: 'Problem already reported!' });
-    }
+    // if (problemExist) {
+    //   return res.status(400).json({ error: 'Problem already reported!' });
+    // }
 
     const { description } = req.body;
 

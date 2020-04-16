@@ -14,7 +14,7 @@ export const Background = styled.View`
 `;
 
 export const Content = styled.View`
-  margin-top: -60px;
+  margin-top: -70px;
   padding: 0 20px;
 `;
 
