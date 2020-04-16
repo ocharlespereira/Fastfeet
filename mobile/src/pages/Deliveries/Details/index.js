@@ -113,7 +113,7 @@ export default function DeliveryDetails() {
             <OptionTitle>Informar{`\n`}Problema</OptionTitle>
           </Option>
           <Option onPress={() =>
-            navigation.navigate('Problems', { orderId: delivery.id })}>
+            navigation.navigate('ViewProblem', { orderId: delivery.id })}>
             <Icon name="info-outline" color={colors.ViewProblem} size={20} />
             <OptionTitle>Visualizar{`\n`}Problemas</OptionTitle>
           </Option>

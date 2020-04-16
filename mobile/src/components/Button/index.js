@@ -1,7 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
-
-import PropTypes from 'prop-types';
 
 import { Container, TextButton } from './styles';
 
@@ -16,8 +15,3 @@ export default function Button({ children, loading, ...rest }) {
     </Container>
   );
 }
-
-Button.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  children: PropTypes.string.isRequired,
-};

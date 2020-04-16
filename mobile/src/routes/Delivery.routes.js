@@ -6,7 +6,7 @@ import ConfirmDelivery from '~/pages/ConfirmDelivery';
 import Deliveries from '~/pages/Deliveries';
 import DeliveryDetails from '~/pages/DeliveryDetails';
 import DeliveryProblem from '~/pages/DeliveryProblem';
-import Problems from '~/pages/Problems';
+import ViewProblem from '~/pages/ViewProblem';
 
 const Stack = createStackNavigator();
 
@@ -51,11 +51,11 @@ export default function DeliveryRoutes() {
         component={DeliveryProblem}
       />
       <Stack.Screen
-        name="Problems"
+        name="ViewProblem"
         options={{
           title: 'Visualizar problemas',
         }}
-        component={Problems}
+        component={ViewProblem}
       />
     </Stack.Navigator>
   );

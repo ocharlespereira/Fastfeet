@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import { useRoute } from '@react-navigation/native';
+import { format, parseISO } from 'date-fns';
 
-import Problem from '~/components/Problem';
 import api from '~/services/api';
 
-import { Container, Background, Content, Title, List } from './styles';
+import {
+  Container,
+  Background,
+  Content,
+  Title,
+  List,
+  ContentList,
+  Description,
+  Date,
+} from './styles';
 
-export default function Problems() {
+export default function ViewProblem() {
   const [problems, setProblems] = useState([]);
   const route = useRoute();
   const { orderId } = route.params;
@@ -38,7 +47,16 @@ export default function Problems() {
         <List
           data={problems}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Problem data={item} />}
+          renderItem={({ item }) => (
+            <ContentList>
+              <Description>{item.description}</Description>
+              <Date>
+                {item.createdAt
+                  ? format(parseISO(item.createdAt), "dd'/'MM'/'yyyy")
+                  : '--/--/--'}
+              </Date>
+            </ContentList>
+          )}
         />
       </Content>
     </Container>
