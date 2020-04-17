@@ -29,6 +29,7 @@ export const Error = styled.span`
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
+  color: ${colors.title};
 
   strong {
     text-align: left;

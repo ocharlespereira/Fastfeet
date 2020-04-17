@@ -132,15 +132,13 @@ export default function RecipientForm({ match }) {
               type="text"
               placeholder="Estado do destinatário"
             />
-            <InputSimple label="CEP" name="zip_code" type="text" />
-            <MaskInput
+            <InputSimple
               label="CEP"
               name="zip_code"
               type="text"
-              placeholder="_____-___"
-              onKeyPress={e =>
-                e.key === 'Enter' ? formRef.current.submitForm() : null
-              }
+              placeholder="09960-580"
+              mask="09960-580"
+              maxLength={9}
             />
           </div>
         </UnForm>

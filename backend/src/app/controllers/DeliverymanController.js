@@ -33,8 +33,8 @@ class DeliverymanController {
     const delivery = nameLike
       ? await Deliveryman.findAll({
         attributes: ['id', 'name', 'email', 'avatar_id'],
-        limit: 20,
-        offset: (page - 1) * 20,
+        limit: 8,
+        offset: (page - 1) * 8,
         include: [
           {
             model: File,
@@ -51,8 +51,8 @@ class DeliverymanController {
       })
       : await Deliveryman.findAll({
         attributes: ['id', 'name', 'email', 'avatar_id'],
-        limit: 20,
-        offset: (page - 1) * 20,
+        limit: 8,
+        offset: (page - 1) * 8,
         include: [
           {
             model: File,

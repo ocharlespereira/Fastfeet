@@ -8,7 +8,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 
 import RecipientItem from './ListItem';
-import { Container, Content, Grid } from './styles';
+import { Container, Content, Grid, ButtonF } from './styles';
 
 export default function RecipientList() {
   const [page, setPage] = useState(1);
@@ -72,6 +72,22 @@ export default function RecipientList() {
             />
           ))}
         </Grid>
+        <section>
+          <ButtonF
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            type="button"
+          >
+            voltar
+          </ButtonF>
+          <ButtonF
+            disabled={recipients.length < 5}
+            type="button"
+            onClick={() => setPage(page + 1)}
+          >
+            proximo
+          </ButtonF>
+        </section>
       </Content>
     </Container>
   );

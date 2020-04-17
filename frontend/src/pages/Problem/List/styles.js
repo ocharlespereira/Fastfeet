@@ -6,7 +6,7 @@ import { colors } from '~/styles/colors';
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0 120px;
+  padding: 0 20px;
 `;
 export const Content = styled.div`
   width: 100%;

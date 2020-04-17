@@ -20,103 +20,103 @@ class OrderController {
 
     const order = nameProductLike
       ? await Order.findAll({
-          attributes: [
-            'id',
-            'product',
-            'status',
-            'canceled_at',
-            'start_date',
-            'end_date',
-          ],
-          limit: 10,
-          offset: (page - 1) * 10,
-          include: [
-            {
-              model: Recipient,
-              as: 'recipient',
-              paranoid: false,
-              attributes: [
-                'id',
-                'name',
-                'street',
-                'number',
-                'complement',
-                'city',
-                'state',
-                'zip_code',
-              ],
-            },
-            {
-              model: Deliveryman,
-              as: 'deliveryman',
-              attributes: ['id', 'name', 'email', 'avatar_id'],
-              include: [
-                {
-                  model: File,
-                  as: 'avatar',
-                  attributes: ['id', 'path', 'url'],
-                },
-              ],
-            },
-            {
-              model: Signature,
-              as: 'signature',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-          where: {
-            product: {
-              [Op.iLike]: `%${nameProductLike}%`,
-            },
+        attributes: [
+          'id',
+          'product',
+          'status',
+          'canceled_at',
+          'start_date',
+          'end_date',
+        ],
+        limit: 8,
+        offset: (page - 1) * 8,
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            paranoid: false,
+            attributes: [
+              'id',
+              'name',
+              'street',
+              'number',
+              'complement',
+              'city',
+              'state',
+              'zip_code',
+            ],
           },
-          order: [['id', 'ASC']],
-        })
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['id', 'name', 'email', 'avatar_id'],
+            include: [
+              {
+                model: File,
+                as: 'avatar',
+                attributes: ['id', 'path', 'url'],
+              },
+            ],
+          },
+          {
+            model: Signature,
+            as: 'signature',
+            attributes: ['id', 'path', 'url'],
+          },
+        ],
+        where: {
+          product: {
+            [Op.iLike]: `%${nameProductLike}%`,
+          },
+        },
+        order: [['id', 'ASC']],
+      })
       : await Order.findAll({
-          attributes: [
-            'id',
-            'product',
-            'status',
-            'canceled_at',
-            'start_date',
-            'end_date',
-          ],
-          limit: 10,
-          offset: (page - 1) * 10,
-          include: [
-            {
-              model: Recipient,
-              as: 'recipient',
-              attributes: [
-                'id',
-                'name',
-                'street',
-                'number',
-                'complement',
-                'city',
-                'state',
-                'zip_code',
-              ],
-            },
-            {
-              model: Deliveryman,
-              as: 'deliveryman',
-              attributes: ['id', 'name', 'email', 'avatar_id'],
-              include: [
-                {
-                  model: File,
-                  as: 'avatar',
-                  attributes: ['id', 'path', 'url'],
-                },
-              ],
-            },
-            {
-              model: Signature,
-              as: 'signature',
-              attributes: ['id', 'path', 'url'],
-            },
-          ],
-          order: [['id', 'ASC']],
-        });
+        attributes: [
+          'id',
+          'product',
+          'status',
+          'canceled_at',
+          'start_date',
+          'end_date',
+        ],
+        limit: 8,
+        offset: (page - 1) * 8,
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            attributes: [
+              'id',
+              'name',
+              'street',
+              'number',
+              'complement',
+              'city',
+              'state',
+              'zip_code',
+            ],
+          },
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['id', 'name', 'email', 'avatar_id'],
+            include: [
+              {
+                model: File,
+                as: 'avatar',
+                attributes: ['id', 'path', 'url'],
+              },
+            ],
+          },
+          {
+            model: Signature,
+            as: 'signature',
+            attributes: ['id', 'path', 'url'],
+          },
+        ],
+        order: [['id', 'ASC']],
+      });
 
     return res.json(order);
   }
@@ -215,8 +215,8 @@ class OrderController {
     /**
      * Envio de email
      */
-    const addressRecipient = `${recipient.street}, ${recipient.number}, 
-                              ${recipient.zip_code}, ${recipient.complement}, 
+    const addressRecipient = `${recipient.street}, ${recipient.number},
+                              ${recipient.zip_code}, ${recipient.complement},
                               ${recipient.city}-${recipient.state}`;
 
     // chamada queue de filas

@@ -9,40 +9,40 @@ class RecipientController {
 
     const recipient = nameLike
       ? await Recipient.findAll({
-          attributes: [
-            'id',
-            'name',
-            'street',
-            'number',
-            'complement',
-            'city',
-            'state',
-            'zip_code',
-          ],
-          limit: 10,
-          offset: (page - 1) * 10,
-          where: {
-            name: {
-              [Op.iLike]: `%${nameLike}%`,
-            },
+        attributes: [
+          'id',
+          'name',
+          'street',
+          'number',
+          'complement',
+          'city',
+          'state',
+          'zip_code',
+        ],
+        limit: 8,
+        offset: (page - 1) * 8,
+        where: {
+          name: {
+            [Op.iLike]: `%${nameLike}%`,
           },
-          order: [['name', 'ASC']],
-        })
+        },
+        order: [['name', 'ASC']],
+      })
       : await Recipient.findAll({
-          attributes: [
-            'id',
-            'name',
-            'street',
-            'number',
-            'complement',
-            'city',
-            'state',
-            'zip_code',
-          ],
-          limit: 10,
-          offset: (page - 1) * 10,
-          order: [['name', 'ASC']],
-        });
+        attributes: [
+          'id',
+          'name',
+          'street',
+          'number',
+          'complement',
+          'city',
+          'state',
+          'zip_code',
+        ],
+        limit: 8,
+        offset: (page - 1) * 8,
+        order: [['name', 'ASC']],
+      });
 
     return res.json(recipient);
   }
