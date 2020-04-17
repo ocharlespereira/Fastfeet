@@ -19,7 +19,7 @@ class CancelOrderMail {
       subject: `Entrega Cancelada!!!`,
       template: 'cancelordermail',
       context: {
-        namehbs: orderCancel.name,
+        namehbs: delivery.name,
         recipienthbs: recipientName,
         addresshbs: addressRecipient,
         orderhbs: orderCancel.id,

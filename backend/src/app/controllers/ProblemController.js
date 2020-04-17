@@ -91,15 +91,7 @@ class ProblemController {
   }
 
   async delete(req, res) {
-    /**
-     * Verifica se existe Ordem de entrega cadastrado
-     */
     const { id } = req.params;
-    const order = await Order.findByPk(id);
-
-    if (!order) {
-      return res.status(400).json({ error: 'Delivery does not exist.' });
-    }
 
     /**
      * Verifica se existe a notificação cadastrado
@@ -138,7 +130,7 @@ class ProblemController {
         },
       ],
       where: {
-        // id: id,
+        id,
         canceled_at: null,
         start_date: { [Op.ne]: null },
       },
