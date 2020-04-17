@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
+import Button from '~/components/Form/Button';
 import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 120px;
 `;
 export const Content = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ export const Content = styled.div`
   }
 `;
 export const Grid = styled.div`
-  height: 40px;
+  height: 630px;
   margin-bottom: 20px;
 
   > section {
@@ -39,5 +40,15 @@ export const Grid = styled.div`
     > div + div {
       margin-top: 20px;
     }
+  }
+`;
+export const ButtonF = styled(Button)`
+  /* display: block; */
+  width: 100px;
+  height: 36px;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: #666;
   }
 `;

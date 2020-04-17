@@ -18,8 +18,8 @@ class ProblemController {
     const { page = 1 } = req.query;
 
     const problem = await Problem.findAll({
-      limit: 10,
-      offset: (page - 1) * 10,
+      limit: 8,
+      offset: ((page || 1) - 1) * 8,
     });
 
     return res.json(problem);

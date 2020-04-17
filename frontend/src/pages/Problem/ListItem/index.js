@@ -34,7 +34,7 @@ export default function ProblemItem({ data, updateProblems }) {
 
   return (
     <Container>
-      <small>#{data.delivery_id}</small>
+      <small>#0{data.delivery_id}</small>
       <small>{data.description}</small>
       <ActionPopUp contentStyle={{ width: '200px', borderRadius: '4px' }}>
         <ActionContainer>

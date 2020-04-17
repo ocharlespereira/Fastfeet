@@ -78,7 +78,7 @@ routes.delete('/orders/:id', OrderController.delete);
 /**
  * Cancelamento de entrega com problema.
  */
-routes.get('/delivery/problems', ProblemController.index);
+routes.get('/problems', ProblemController.index);
 routes.delete('/problem/:id/cancel-delivery', ProblemController.delete);
 
 export default routes;
