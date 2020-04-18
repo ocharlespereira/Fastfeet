@@ -40,7 +40,7 @@ export const Grid = styled.div`
   }
 
   > div + div {
-    margin-top: 20px:
+    margin-top: 20px;
   }
 `;
 
