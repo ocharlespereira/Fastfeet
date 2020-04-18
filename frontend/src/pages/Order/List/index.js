@@ -10,7 +10,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 
 import OrderItem from './ListItem';
-import { Container, Content, Grid } from './styles';
+import { Container, Content, Grid, ButtonF } from './styles';
 
 export default function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -59,7 +59,7 @@ export default function OrderList() {
 
   useEffect(() => {
     loadOrders();
-	}, [page]); //eslint-disable-line
+  }, [page]); //eslint-disable-line
 
   return (
     <Container>
@@ -91,6 +91,22 @@ export default function OrderList() {
             <OrderItem updateOrders={loadOrders} key={order.id} data={order} />
           ))}
         </Grid>
+        <section>
+          <ButtonF
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            type="button"
+          >
+            voltar
+          </ButtonF>
+          <ButtonF
+            disabled={orders.length < 5}
+            type="button"
+            onClick={() => setPage(page + 1)}
+          >
+            proximo
+          </ButtonF>
+        </section>
       </Content>
     </Container>
   );

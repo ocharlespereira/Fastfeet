@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import Button from '~/components/Form/Button';
 import { colors } from '~/styles/colors';
 
 export const Container = styled.div`
@@ -38,5 +39,15 @@ export const Grid = styled.div`
 
   > div + div {
     margin-top: 20px;
+  }
+`;
+
+export const ButtonF = styled(Button)`
+  width: 100px;
+  height: 36px;
+
+  &:disabled {
+    cursor: not-allowed;
+    background: #666;
   }
 `;
