@@ -8,7 +8,7 @@ import api from '~/services/api';
 import history from '~/services/history';
 
 import DeliverymanItem from './ListItem';
-import { Container, Content, Grid } from './styles';
+import { Container, Content, Grid, ButtonF } from './styles';
 
 // import { Container } from './styles';
 
@@ -74,6 +74,22 @@ export default function DeliverymanList() {
             />
           ))}
         </Grid>
+        <section>
+          <ButtonF
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            type="button"
+          >
+            voltar
+          </ButtonF>
+          <ButtonF
+            disabled={deliveryman.length < 5}
+            type="button"
+            onClick={() => setPage(page + 1)}
+          >
+            proximo
+          </ButtonF>
+        </section>
       </Content>
     </Container>
   );
