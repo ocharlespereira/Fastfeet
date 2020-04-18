@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
 
@@ -85,19 +86,19 @@ class RecipientController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    const { name } = req.body;
+    // const { name } = req.body;
 
-    const recipientExists = await Recipient.findOne({
-      where: { name },
-      order: ['name'],
-    });
+    // const recipientExists = await Recipient.findOne({
+    //   where: { name },
+    //   order: ['name'],
+    // });
 
-    if (recipientExists) {
-      return res.status(400).json({ error: 'Recipient already exists.' });
-    }
+    // if (recipientExists) {
+    //   return res.status(400).json({ error: 'Recipient already exists.' });
+    // }
 
     const {
-      id,
+      name,
       street,
       number,
       complement,
@@ -107,7 +108,6 @@ class RecipientController {
     } = await Recipient.create(req.body);
 
     return res.json({
-      id,
       name,
       street,
       number,
@@ -119,20 +119,6 @@ class RecipientController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      street: Yup.string(),
-      number: Yup.number(),
-      complement: Yup.string(),
-      city: Yup.string(),
-      state: Yup.string(),
-      zip_code: Yup.number(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails.' });
-    }
-
     const { id } = req.params;
 
     const recipientId = await Recipient.findByPk(id);

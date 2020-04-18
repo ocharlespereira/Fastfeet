@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 
 import { SaveButton, BackButton } from '~/components/Button';
-import { InputSimple, MaskInput } from '~/components/Form';
+import { InputSimple } from '~/components/Form';
 import HeaderForm from '~/components/HeaderForm';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -46,17 +46,22 @@ export default function RecipientForm({ match }) {
       });
 
       if (id) {
-        await api.put(`/recipients/${id}`, {
-          name: data.name,
-          street: data.street,
-          number: data.number,
-          complement: data.complement,
-          city: data.city,
-          state: data.state,
-          zip_code: data.zip_code,
-        });
-        toast.success('Destinatário editado com sucesso!');
-        history.push('/recipients');
+        try {
+          await api.put(`/recipients/${id}`, {
+            name: data.name,
+            street: data.street,
+            number: data.number,
+            complement: data.complement,
+            city: data.city,
+            state: data.state,
+            zip_code: data.zip_code,
+          });
+          toast.success('Destinatário editado com sucesso!');
+          history.push('/recipients');
+        } catch (error) {
+          toast.error('Falha ao atualizar destinatário.');
+          history.push('/recipients');
+        }
       } else {
         await api.post('/recipients', {
           name: data.name,

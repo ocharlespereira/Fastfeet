@@ -81,7 +81,7 @@ export default function RecipientList() {
             voltar
           </ButtonF>
           <ButtonF
-            disabled={recipients.length < 5}
+            disabled={recipients.length < 8}
             type="button"
             onClick={() => setPage(page + 1)}
           >

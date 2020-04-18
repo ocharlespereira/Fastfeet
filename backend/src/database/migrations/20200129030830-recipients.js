@@ -28,11 +28,11 @@ module.exports = {
         allowNull: true,
       },
       state: {
-        type: Sequelize.STRING(2),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       zip_code: {
-        type: Sequelize.STRING(8),
+        type: Sequelize.STRING,
         allowNull: false,
       },
       created_at: {
