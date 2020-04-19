@@ -1,9 +1,12 @@
-<p align="center">Projeto Fastfeet - Bootcamp GoStack 10.0</p>
+<h2 align="center">
+align="center">Projeto Fastfeet - Bootcamp GoStack 10.0</p>
+</h2>
 
 ## :rocket: Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 
+- [Vscode (EditorConfig, vceditconfig, ESLint, vceslint e Prettier)](https://code.visualstudio.com/)
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org/)
 - [Docker](https://www.docker.com/)
