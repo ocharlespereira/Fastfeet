@@ -1,5 +1,5 @@
 <h2 align="center">
-align="center">Projeto Fastfeet - Bootcamp GoStack 10.0</p>
+align="center">Projeto Fastfeet - Bootcamp GoStack 10.0
 </h2>
 
 ## :rocket: Tecnologias
