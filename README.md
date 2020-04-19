@@ -1,6 +1,8 @@
-<h2 align="center">
-align="center">Projeto Fastfeet - Bootcamp GoStack 10.0
-</h2>
+<h1 align="center">
+  <img alt="FastFeet" height="215" title="FastFeet" src=".github/logo.svg" />
+</h1>
+
+<p align="center">Projeto Fastfeet - Bootcamp GoStack 10.0</p>
 
 ## :rocket: Tecnologias
 
@@ -29,7 +31,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Sequelize](https://sequelize.org/)
 - [youch](https://github.com/poppinss/youch)
 - [yup](https://github.com/jquense/yup)
-- [redis](https://redis.js.org/)
+- [Redis](https://redis.js.org/)
+- [Sentry](https://sentry.io/welcome/)
 
 
 # Front-End
