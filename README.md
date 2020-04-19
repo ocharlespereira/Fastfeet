@@ -29,6 +29,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [Sequelize](https://sequelize.org/)
 - [youch](https://github.com/poppinss/youch)
 - [yup](https://github.com/jquense/yup)
+- [redis](https://redis.js.org/)
 
 
 # Front-End
@@ -68,13 +69,10 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 -  [yup](https://github.com/jquense/yup)
 -  [AsyncStorage](https://github.com/react-native-community/async-storage)
 
-# Others
-
--  [VS Code][vc] with [EditorConfig][vceditconfig], [ESLint][vceslint] and [Prettier][prettier]
 
 ## :computer: Instalação, execução e desenvolvimento
 
-Importe o arquivo `Insomnia.json` no Insomnia ou clique no botão [Run in Insomnia](#insomniaButton)
+Importe o arquivo `fastfeet.json` no Insomnia.
 
 ### Pré-requisitos
 
@@ -89,6 +87,7 @@ Importe o arquivo `Insomnia.json` no Insomnia ou clique no botão [Run in Insomn
 - Rode `yarn` para instalar as dependências(node_modules);
 - Rode `cp .env.example .env` e preencha o arquivo `.env` com SUAS variáveis ambiente;
 - Rode `docker-compose up -d` para montar o ambiente;
+- Rode `docker start fastfeet fastfeetredis` para montar o ambiente;
 - Rode `yarn sequelize db:migrate` para executar as migrations;
 - Para executar somente a migration de `admin-user` rode o comando `yarn sequelize db:seed:all`
 - Rode `yarn queue` para iniciar o servidor de envio de emails;
