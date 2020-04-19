@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   img {
-    height: 36px;
+    max-height: 300px;
     margin-top: 25px;
   }
 

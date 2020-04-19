@@ -6,7 +6,6 @@ import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
 import RecipientController from './app/controllers/RecipientController';
 import FileController from './app/controllers/FileController';
-import SignatureController from './app/controllers/SignatureController';
 import DeliverymanController from './app/controllers/DeliverymanController';
 import DeliveriesController from './app/controllers/DeliveriesController';
 import OrderController from './app/controllers/OrderController';
@@ -24,10 +23,9 @@ routes.post('/sessions', SessionController.store);
  * Upload de Imagens
  */
 routes.post('/files', upload.single('file'), FileController.store);
-routes.post('/signatures', upload.single('file'), SignatureController.store);
 
 /**
- * Login do entregador
+ * Login do entregador - Mobile
  */
 routes.get('/delivery/:id/orders', DeliveryOrdersController.show);
 

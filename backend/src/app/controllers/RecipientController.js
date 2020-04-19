@@ -6,7 +6,7 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const { page = 1, nameLike } = req.query;
+    const { page = 1, q: nameLike } = req.query;
 
     const recipient = nameLike
       ? await Recipient.findAll({

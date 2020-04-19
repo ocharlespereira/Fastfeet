@@ -37,11 +37,8 @@ export default function OrderItem({ data, updateOrders }) {
 
   return (
     <Container>
-      <small>#{data.id}</small>
+      <small>#0{data.id}</small>
       <small>{data.recipient.name}</small>
-
-      {/* avatar deliveryman */}
-
       <small>
         <div>
           {data.deliveryman.avatar ? (

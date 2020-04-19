@@ -69,7 +69,7 @@ class OrderController {
             [Op.iLike]: `%${nameProductLike}%`,
           },
         },
-        order: [['id', 'ASC']],
+        order: [['created_at', 'DESC']],
       })
       : await Order.findAll({
         attributes: [
@@ -115,7 +115,7 @@ class OrderController {
             attributes: ['id', 'path', 'url'],
           },
         ],
-        order: [['id', 'ASC']],
+        order: [['created_at', 'DESC']],
       });
 
     return res.json(order);
@@ -158,8 +158,8 @@ class OrderController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    // Verifica se o recipientId está cadastrado na tabela recipients
     const { recipient_id, deliveryman_id } = req.body;
+    // Verifica se o recipientId está cadastrado na tabela recipients
 
     let recipient = null;
 

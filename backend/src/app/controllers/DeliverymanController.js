@@ -28,7 +28,7 @@ class DeliverymanController {
   }
 
   async index(req, res) {
-    const { page = 1, nameLike } = req.query;
+    const { page = 1, q: nameLike } = req.query;
 
     const delivery = nameLike
       ? await Deliveryman.findAll({

@@ -34,7 +34,7 @@ export default function DeliverymanList() {
 
     const res = await api.get('/deliverymans', {
       params: {
-        nameLike: e.target.value,
+        q: e.target.value,
         page,
       },
     });

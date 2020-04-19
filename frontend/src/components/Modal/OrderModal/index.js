@@ -38,7 +38,6 @@ export default function OrderModal({ data }) {
         {data.signature ? (
           <div style={{ paddingBottom: '25px' }}>
             <strong>Assinatura do destinatário</strong>
-            <small>{data.signature.url}</small>
             <img src={data.signature.url} alt="signature" />
           </div>
         ) : null}

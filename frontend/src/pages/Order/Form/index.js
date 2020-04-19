@@ -45,7 +45,7 @@ export default function OrderForm({ match }) {
   async function loadRecipientOptions(inputValue, callback) {
     const res = await api.get('/recipients', {
       params: {
-        nameLike: inputValue,
+        q: inputValue,
       },
     });
 
@@ -60,7 +60,7 @@ export default function OrderForm({ match }) {
   async function loadDeliverymanOptions(inputValue, callback) {
     const res = await api.get('/deliverymans', {
       params: {
-        nameLike: inputValue,
+        q: inputValue,
       },
     });
 

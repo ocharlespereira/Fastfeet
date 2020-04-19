@@ -33,7 +33,7 @@ export default function RecipientList() {
 
     const response = await api.get('/recipients', {
       params: {
-        nameLike: e.target.value,
+        q: e.target.value,
         page,
       },
     });

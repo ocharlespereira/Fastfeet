@@ -7,7 +7,7 @@ import Order from '../models/Order';
 import Problem from '../models/Problem';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
-import Signature from '../models/Signature';
+import File from '../models/File';
 import Notification from '../schemas/Notification';
 
 import CancelOrderMail from '../jobs/CancelOrderMail';
@@ -110,12 +110,12 @@ class ProblemController {
     const orderCancel = await Order.findByPk(id, {
       include: [
         {
-          model: Signature,
+          model: File,
           as: 'signature',
           attributes: ['id', 'path', 'url'],
         },
         {
-          model: Recipient,
+          model: File,
           as: 'recipient',
           attributes: [
             'id',
