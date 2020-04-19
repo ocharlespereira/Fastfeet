@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -46,8 +47,8 @@ export default function OrderItem({ data, updateOrders }) {
           {data.deliveryman.avatar ? (
             <img src={data.deliveryman.avatar.url} alt="avatar" />
           ) : (
-            <PhotoName name={data.deliveryman.name} />
-          )}
+              <PhotoName name={data.deliveryman.name} />
+            )}
         </div>
         {data.deliveryman.name}
       </small>

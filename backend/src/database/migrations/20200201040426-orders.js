@@ -24,7 +24,7 @@ module.exports = {
       signature_id: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: { model: 'signatures', key: 'id' },
+        references: { model: 'files', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
       },

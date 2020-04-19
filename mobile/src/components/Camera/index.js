@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
 import React, { useRef, useState } from 'react';
 import { Alert } from 'react-native';
@@ -26,15 +27,13 @@ export default function Camera({ loadPreview }) {
     data.append('file', {
       uri: image.uri,
       type: `image/${extension}`,
-      name,
+      name: `${name}.jpg`,
     });
 
     try {
-      const response = await api.post('signatures', data, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
+      const res = await api.post('files', data);
 
-      const { id, url } = response.data;
+      const { id, url } = res.data;
 
       setLoading(false);
       loadPreview(id, url);
@@ -61,6 +60,7 @@ export default function Camera({ loadPreview }) {
         ref={camera}
         type={RNCamera.Constants.Type.back}
         flashMode={RNCamera.Constants.FlashMode.off}
+        captureAudio={false}
         port
         androidCameraPermissionOptions={{
           title: 'Permissão para usar a câmera',
@@ -68,12 +68,12 @@ export default function Camera({ loadPreview }) {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancelar',
         }}
-        androidRecordAudioPermissionOptions={{
-          title: 'Permission to use audio recording',
-          message: 'We need your permission to use your audio',
-          buttonPositive: 'Ok',
-          buttonNegative: 'Cancel',
-        }}
+      // androidRecordAudioPermissionOptions={{
+      //   title: 'Permission to use audio recording',
+      //   message: 'We need your permission to use your audio',
+      //   buttonPositive: 'Ok',
+      //   buttonNegative: 'Cancel',
+      // }}
       />
       {loading ? (
         <LoadingSpinner />

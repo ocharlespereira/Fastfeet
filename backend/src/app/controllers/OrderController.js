@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as Yup from 'yup';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -6,7 +7,6 @@ import { Op } from 'sequelize';
 import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
-import Signature from '../models/Signature';
 import File from '../models/File';
 import Notification from '../schemas/Notification';
 
@@ -59,7 +59,7 @@ class OrderController {
             ],
           },
           {
-            model: Signature,
+            model: File,
             as: 'signature',
             attributes: ['id', 'path', 'url'],
           },
@@ -110,7 +110,7 @@ class OrderController {
             ],
           },
           {
-            model: Signature,
+            model: File,
             as: 'signature',
             attributes: ['id', 'path', 'url'],
           },

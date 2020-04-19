@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { parseISO, format } from 'date-fns';
 import PropTypes from 'prop-types';
 
 import Modal from '../Modal';
@@ -19,17 +20,17 @@ export default function OrderModal({ data }) {
           </small>
           <small>{data.recipient.zip_code}</small>
         </div>
-        {data.start_dateFormated ? (
+        {data.start_date ? (
           <div>
             <strong>Datas</strong>
             <div>
               <span>Retirada: </span>
-              <small>{data.start_dateFormated}</small>
+              <small>{format(parseISO(data.start_date), 'dd/MM/yyyy')}</small>
             </div>
-            {data.end_dateFormated ? (
+            {data.end_date ? (
               <div>
                 <span>Entrega: </span>
-                <small>{data.end_dateFormated}</small>
+                <small>{format(parseISO(data.end_date), 'dd/MM/yyyy')}</small>
               </div>
             ) : null}
           </div>
@@ -37,6 +38,7 @@ export default function OrderModal({ data }) {
         {data.signature ? (
           <div style={{ paddingBottom: '25px' }}>
             <strong>Assinatura do destinatário</strong>
+            <small>{data.signature.url}</small>
             <img src={data.signature.url} alt="signature" />
           </div>
         ) : null}
@@ -47,8 +49,8 @@ export default function OrderModal({ data }) {
 
 OrderModal.propTypes = {
   data: PropTypes.shape({
-    start_dateFormated: PropTypes.string,
-    end_dateFormated: PropTypes.string,
+    start_date: PropTypes.string,
+    end_date: PropTypes.string,
     recipient: PropTypes.shape({
       name: PropTypes.string,
       street: PropTypes.string,

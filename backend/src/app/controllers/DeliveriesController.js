@@ -3,7 +3,7 @@ import { Op } from 'sequelize';
 import Order from '../models/Order';
 import Deliveryman from '../models/Deliveryman';
 import Recipient from '../models/Recipient';
-import Signature from '../models/Signature';
+import File from '../models/File';
 
 class DeliveriesController {
   async index(req, res) {
@@ -46,7 +46,7 @@ class DeliveriesController {
           ],
         },
         {
-          model: Signature,
+          model: File,
           as: 'signature',
           attributes: ['id', 'url', 'path'],
         },
@@ -85,7 +85,7 @@ class DeliveriesController {
 
     const { signature_id } = req.body;
 
-    const signatureImage = await Signature.findByPk(signature_id);
+    const signatureImage = await File.findByPk(signature_id);
 
     if (!signatureImage) {
       return res.status(400).json({ error: 'Signature image does not exists' });

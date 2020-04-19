@@ -4,12 +4,12 @@ class SignatureController {
   async store(req, res) {
     const { originalname: name, filename: path } = req.file;
 
-    const file = await Signature.create({
+    const signature = await Signature.create({
       name,
       path,
     });
 
-    return res.json(file);
+    return res.json(signature);
   }
 }
 

@@ -49,7 +49,7 @@ export default function ConfirmDelivery({ navigation }) {
         navigation.push('Entregas');
         Alert.alert(
           'Entrega confirmada',
-          'A entrega foi confirmada com sucesso!'
+          'A entrega foi confirmada com sucesso!!!'
         );
       } catch (error) {
         Alert.alert(

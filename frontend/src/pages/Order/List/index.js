@@ -21,7 +21,7 @@ export default function OrderList() {
     return data.map(order => ({
       ...order,
       start_dateFormated: order.start_dateFormated
-        ? format(parseISO(order.start_date), 'dd//MM/yyyy')
+        ? format(parseISO(order.start_date), 'dd/MM/yyyy')
         : null,
       end_dateFormated: order.end_dateFormated
         ? format(parseISO(order.end_date), 'dd/MM/yyy')

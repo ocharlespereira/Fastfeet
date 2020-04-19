@@ -1,13 +1,4 @@
-import {
-  parseISO,
-  isBefore,
-  setHours,
-  isAfter,
-  startOfDay,
-  getHours,
-  endOfDay,
-  subHours,
-} from 'date-fns';
+import { parseISO, startOfDay, getHours, endOfDay, subHours } from 'date-fns';
 import { Op } from 'sequelize';
 import * as Yup from 'yup';
 
@@ -15,7 +6,6 @@ import Order from '../models/Order';
 import Recipient from '../models/Recipient';
 import Deliveryman from '../models/Deliveryman';
 import File from '../models/File';
-import Signature from '../models/Signature';
 
 /**
  * O que o Entregador pode fazer é:
@@ -68,7 +58,7 @@ class DeliveryOrdersController {
           ],
         },
         {
-          model: Signature,
+          model: File,
           as: 'signature',
           attributes: ['id', 'url', 'path'],
         },

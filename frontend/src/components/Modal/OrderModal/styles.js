@@ -21,7 +21,7 @@ export const Container = styled.div`
 
     strong {
       margin-bottom: 4px;
-      font-size: 14px;
+      font-size: 16px;
       color: ${colors.title};
     }
 
