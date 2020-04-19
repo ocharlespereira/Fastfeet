@@ -1,15 +1,4 @@
-<p align="center">Este codigo representa a minha solução do desafio do Bootcamp GoStack 10.0</p>
-
-<p id="insomniaButton" align="center">
-  <a href="https://insomnia.rest/run/?label=FastFeet&uri=https%3A%2F%2Fraw.githubusercontent.com%2FEliasGcf%2Ffastfeet%2Fmaster%2FInsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
-</p>
-
-<strong>Links dos desafios:</strong>
-
-- [Etapa 1](https://github.com/EliasGcf/fastfeet/blob/master/server/ETAPA_01.md)
-- [Etapa 2](https://github.com/EliasGcf/fastfeet/blob/master/server/ETAPA_02.md)
-- [Etapa 3](https://github.com/EliasGcf/fastfeet/blob/master/web/ETAPA_03.md)
-- [Etapa 4](https://github.com/EliasGcf/fastfeet/blob/master/mobile/ETAPA_04.md)
+<p align="center">Projeto Fastfeet - Bootcamp GoStack 10.0</p>
 
 ## :rocket: Tecnologias
 
