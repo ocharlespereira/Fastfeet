@@ -68,12 +68,12 @@ export default function Camera({ loadPreview }) {
           buttonPositive: 'Ok',
           buttonNegative: 'Cancelar',
         }}
-      // androidRecordAudioPermissionOptions={{
-      //   title: 'Permission to use audio recording',
-      //   message: 'We need your permission to use your audio',
-      //   buttonPositive: 'Ok',
-      //   buttonNegative: 'Cancel',
-      // }}
+        androidRecordAudioPermissionOptions={{
+          title: 'Permission to use audio recording',
+          message: 'We need your permission to use your audio',
+          buttonPositive: 'Ok',
+          buttonNegative: 'Cancel',
+        }}
       />
       {loading ? (
         <LoadingSpinner />
