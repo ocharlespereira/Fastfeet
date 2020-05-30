@@ -45,7 +45,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
-tmp/
+tmp/*
+!tmp/.gitkeep
 
 # TypeScript v1 declaration files
 typings/
