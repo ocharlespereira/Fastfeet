@@ -7,7 +7,7 @@ module.exports = {
   extends: [
     'airbnb',
     'prettier',
-    'prettier/react'],
+    'prettier/react',
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
